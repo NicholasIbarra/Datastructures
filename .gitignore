@@ -1,0 +1,49 @@
+# User Specific
+*.user
+*.suo
+
+# Build
+bin/
+bld/
+dist/
+obj/
+edge/
+platform/
+publish/
+
+# Logs
+iisnode/
+log/
+*.log
+
+# Editors
+.vs
+.vscode
+.idea
+.settings
+
+# Cache
+.sass-cache
+.tscache
+
+# Other
+tmp/
+node_modules/
+packages/
+fusion/
+plugins/
+.orig
+.js
+.basedir.ts
+obj/Datastructure.csproj.nuget.dgspec.json
+obj/Datastructure.csproj.nuget.g.props
+obj/project.assets.json
+obj/project.nuget.cache
+obj/Debug/netcoreapp3.1/Datastructure.AssemblyInfo.cs
+obj/Debug/netcoreapp3.1/Datastructure.assets.cache
+obj/Debug/netcoreapp3.1/Datastructure.csproj.CoreCompileInputs.cache
+obj/Debug/netcoreapp3.1/Datastructure.csproj.FileListAbsolute.txt
+obj/Debug/netcoreapp3.1/Datastructure.csprojAssemblyReference.cache
+obj/Debug/netcoreapp3.1/Datastructure.dll
+obj/Debug/netcoreapp3.1/Datastructure.genruntimeconfig.cache
+obj/Debug/netcoreapp3.1/Datastructure.pdb
