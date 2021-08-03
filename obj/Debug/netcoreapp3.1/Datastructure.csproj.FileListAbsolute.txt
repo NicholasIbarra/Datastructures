@@ -1,0 +1,13 @@
+C:\Users\Nicholas\source\repos\Education\Datastructure\bin\Debug\netcoreapp3.1\Datastructure.exe
+C:\Users\Nicholas\source\repos\Education\Datastructure\bin\Debug\netcoreapp3.1\Datastructure.deps.json
+C:\Users\Nicholas\source\repos\Education\Datastructure\bin\Debug\netcoreapp3.1\Datastructure.runtimeconfig.json
+C:\Users\Nicholas\source\repos\Education\Datastructure\bin\Debug\netcoreapp3.1\Datastructure.runtimeconfig.dev.json
+C:\Users\Nicholas\source\repos\Education\Datastructure\bin\Debug\netcoreapp3.1\Datastructure.dll
+C:\Users\Nicholas\source\repos\Education\Datastructure\bin\Debug\netcoreapp3.1\Datastructure.pdb
+C:\Users\Nicholas\source\repos\Education\Datastructure\obj\Debug\netcoreapp3.1\Datastructure.csprojAssemblyReference.cache
+C:\Users\Nicholas\source\repos\Education\Datastructure\obj\Debug\netcoreapp3.1\Datastructure.AssemblyInfoInputs.cache
+C:\Users\Nicholas\source\repos\Education\Datastructure\obj\Debug\netcoreapp3.1\Datastructure.AssemblyInfo.cs
+C:\Users\Nicholas\source\repos\Education\Datastructure\obj\Debug\netcoreapp3.1\Datastructure.csproj.CoreCompileInputs.cache
+C:\Users\Nicholas\source\repos\Education\Datastructure\obj\Debug\netcoreapp3.1\Datastructure.dll
+C:\Users\Nicholas\source\repos\Education\Datastructure\obj\Debug\netcoreapp3.1\Datastructure.pdb
+C:\Users\Nicholas\source\repos\Education\Datastructure\obj\Debug\netcoreapp3.1\Datastructure.genruntimeconfig.cache
