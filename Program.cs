@@ -27,7 +27,7 @@ namespace Datastructure
             //Console.WriteLine(Solution.LeastInerval(tasks, cooldown));
 
             //AddTwoNumbers.Test1();
-            SubsetsII.Test();
+            Datastructure.Algorithms.Practice.SubsetsII.Test();
 
         }
 

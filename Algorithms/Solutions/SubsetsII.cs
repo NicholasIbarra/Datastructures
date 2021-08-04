@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Datastructure.Solutions
@@ -8,19 +9,22 @@ namespace Datastructure.Solutions
     {
         public static void Test()
         {
-            int[] nums = new int[] { 1, 2, 3 };
+            int[] nums = new int[] { 2, 1, 2 };
             var result = SubsetsWithDup(nums);
         }
 
         public static IList<IList<int>> SubsetsWithDup(int[] nums)
         {
-            return RecursiveSolution(nums);
+            var result = BacktrackingSolution(nums);
+            result.ToList().ForEach(r => Console.WriteLine(string.Join(", ", r)));
+
+            return result;
         }
 
         /// <summary>
         /// Solve powerset recussively by first checking if array is empty
-        /// if Has values, go to last elemnt in the set and and return {} and {last num}
-        /// Then union results with element n - 1
+        /// if Has values, go to last elemnt in the set and return {} and {last num}
+        /// Then union results with element n
         /// Continue until reached first element
         /// 
         /// Time Complexity: O(n * s ^ (n - 1))
@@ -107,6 +111,17 @@ namespace Datastructure.Solutions
 
         public static IList<IList<int>> result = new List<IList<int>>();
 
+        /// <summary>
+        /// Solve powerset using dfs backtracking solution
+        /// First need to sort nums array so duplicates are in sequence and can be detected
+        /// Then we traverse the tree adding a subset on each call
+        /// For each level, we need to iterate through all the nums excluding duplicates
+        /// Duplicates are identified by sequence numbers that are next to each other
+        /// Duplicates should only be skipped after the first element is processed
+        /// 
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
         public static IList<IList<int>> BacktrackingSolution(int[] nums)
         {
             var emptySEt = new List<int> { };
@@ -118,16 +133,20 @@ namespace Datastructure.Solutions
 
             // Sort so duplicates are next to each other
             Array.Sort(nums);
-            Backtracking(0, new List<int>(), nums);
+
+            var subset = new List<int>();
+
+            Backtracking(0, subset, nums);
 
             return result;
         }
 
-        public static void Backtracking(int start, IList<int> curr, int[] nums)
+        public static void Backtracking(int start, List<int> subset, int[] nums)
         {
-            result.Add(new List<int>(curr));
+            result.Add(new List<int>(subset));
+            Console.WriteLine(string.Join(", ", subset));
 
-            for(int i = start; i < nums.Length; i++)
+            for (int i = start; i < nums.Length; i++)
             {
                 // Check for duplicates by comparing if the current elemnt is the same as the previous
                 // Check against starting element to ensure index 0 is accounted for
@@ -136,10 +155,11 @@ namespace Datastructure.Solutions
                     continue;
                 }
 
-                curr.Add(nums[i]);
-                Backtracking(i + 1, curr, nums);
+                subset.Add(nums[i]);
+                Backtracking(i + 1, subset, nums);
 
-                curr.Remove(curr.Count - 1);
+                // Remove last item
+                subset.RemoveAt(subset.Count - 1);
             }
         }
     }
