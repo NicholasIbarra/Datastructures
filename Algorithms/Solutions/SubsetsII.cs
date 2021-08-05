@@ -5,6 +5,11 @@ using System.Text;
 
 namespace Datastructure.Solutions
 {
+    /// <summary>
+    /// Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
+    /// The solution set must not contain duplicate subsets.Return the solution in any order.
+    /// </summary>
+    /// 
     class SubsetsII
     {
         public static void Test()
@@ -15,7 +20,7 @@ namespace Datastructure.Solutions
 
         public static IList<IList<int>> SubsetsWithDup(int[] nums)
         {
-            var result = BacktrackingSolution(nums);
+            var result = BitmaskingSolution(nums);
             result.ToList().ForEach(r => Console.WriteLine(string.Join(", ", r)));
 
             return result;
@@ -161,6 +166,60 @@ namespace Datastructure.Solutions
                 // Remove last item
                 subset.RemoveAt(subset.Count - 1);
             }
+        }
+
+        /// <summary>
+        /// Soive the powerset using bitmasking
+        /// 
+        /// Sort the nums array to identify duplicates
+        /// Get max number of subets (n^2) and iterate from 0 to max
+        /// Iterate over each element in nums
+        /// if the jth value is set add to subset and create a hashcode (duplicates)
+        /// If hascode doesn't exist, add and add subset to final results
+        /// 
+        /// Time: O(n * n^2)
+        /// Space: O(n * n^2)
+        /// 
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static IList<IList<int>> BitmaskingSolution(int[] nums)
+        {
+            var result = new List<IList<int>>();
+
+            // Sort to identiy duplicates
+            Array.Sort(nums);
+
+            int n = nums.Length;
+            int max = (int)Math.Pow(2, n);
+
+            HashSet<string> seen = new HashSet<string>();
+
+            for (var index = 0; index < max; index++)
+            {
+                List<int> subset = new List<int>();
+                StringBuilder hashcode = new StringBuilder();
+
+                for (int j = 0; j < n; j++)
+                {
+                    int mask = 1 << j;
+                    int isSet = mask & index;
+
+                    if (isSet != 0)
+                    {
+                        subset.Add(nums[j]);
+                        hashcode.Append(nums[j]).Append(",");
+                    }
+                }
+
+                if (!seen.Contains(hashcode.ToString()))
+                {
+                    result.Add(subset);
+                    seen.Add(hashcode.ToString());
+                }
+            }
+
+            return result;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Datastructure.Algorithms.Practice
     {
         public static void Test()
         {
-            int[] nums = new int[] { 1, 2, 3 };
+            int[] nums = new int[] { 1, 2, 2 };
             SubsetsWithDup(nums);
         }
 
@@ -17,9 +17,9 @@ namespace Datastructure.Algorithms.Practice
         {
             //var result = BacktrackingSolution(nums);
             //var result = ReursiveSolution(nums);
-            var result = IterativeSolution(nums);
+            var result = BitmaskingSolution(nums);
 
-            result.ToList().ForEach(x => Console.WriteLine(string.Join(", ", x)));             
+            result.ToList().ForEach(x => Console.WriteLine(string.Join(", ", x)));
             return result;
         }
 
@@ -156,6 +156,75 @@ namespace Datastructure.Algorithms.Practice
                 // Remove last element to process next branch
                 subset.RemoveAt(subset.Count - 1);
             }
+        }
+
+        public static IList<IList<int>> SampleSolution(int[] nums)
+        {
+            Array.Sort(nums);
+
+            IList<IList<int>> subsets = new List<IList<int>>();
+            subsets.Add(new List<int>());
+
+            int startIndex = 0;
+            int endIndex = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                startIndex = 0;
+
+                if (i > 0 && nums[i] == nums[i - 1])
+                {
+                    startIndex = endIndex + 1;
+                }
+
+                endIndex = subsets.Count - 1;
+
+                for (int j = startIndex; j <= endIndex; j++)
+                {
+                    IList<int> subset = new List<int>(subsets[j]);
+                    subset.Add(nums[i]);
+                    subsets.Add(subset);
+                }
+            }
+
+            return subsets;
+        }
+
+        public static IList<IList<int>> BitmaskingSolution(int[] nums)
+        {
+            Array.Sort(nums);
+
+            int n = nums.Length;
+            int max = (int)Math.Pow(2, n);
+
+            List<IList<int>> results = new List<IList<int>>();
+            HashSet<string> seen = new HashSet<string>();
+
+            for (int index = 0; index < max; index++)
+            {
+                List<int> subset = new List<int>();
+                StringBuilder hashcode = new StringBuilder();
+
+                for (int j = 0; j < n; j++)
+                {
+                    int mask = 1 << j;
+                    int isSet = mask & index;
+
+                    if (isSet != 0)
+                    {
+                        subset.Add(nums[j]);
+                        hashcode.Append(nums[j]).Append(",");
+                    }
+                }
+
+                if (!seen.Contains(hashcode.ToString()))
+                {
+                    results.Add(subset);
+                    seen.Add(hashcode.ToString());
+                }
+            }
+
+            return results;
         }
     }
 }
