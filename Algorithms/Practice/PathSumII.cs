@@ -6,7 +6,8 @@ using System.Text;
 namespace Datastructure.Algorithms.Practice
 {
     /// <summary>
-    /// Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where each path's sum equals targetSum.
+    /// Given the root of a binary tree and an integer targetSum
+    /// return all root-to-leaf paths where each path's sum equals targetSum.
     /// A leaf is a node with no children.
     /// 
     /// https://leetcode.com/explore/challenge/card/august-leetcoding-challenge-2021/613/week-1-august-1st-august-7th/3838/
@@ -74,30 +75,32 @@ namespace Datastructure.Algorithms.Practice
         public static IList<IList<int>> PathSum(TreeNode root, int targetSum)
         {
             List<IList<int>> paths = new List<IList<int>>();
-            findPath(root, targetSum, new List<int>(), paths);
+            FindPaths(root, targetSum, new List<int>(), paths);
 
             return paths;
         }
 
-        private static void findPath(TreeNode node, int targetSum, List<int> current, List<IList<int>> paths)
+        private static void FindPaths(TreeNode node, int targetSum, List<int> subset, List<IList<int>> paths)
         {
-            // Handle base case
+            // Base case
             if (node == null)
             {
                 return;
             }
 
-            current.Add(node.val);
+            // Add node value to current subset path
+            subset.Add(node.val);
 
+            // Check for taget solution
             if (node.val == targetSum && node.left == null && node.right == null)
             {
-                paths.Add(current);
+                paths.Add(subset);
                 return;
             }
 
-            // Traverse left and right side of tree
-            findPath(node.left, targetSum - node.val, new List<int>(current), paths);
-            findPath(node.right, targetSum - node.val, new List<int>(current), paths);
+            // Search left and right side of tree
+            FindPaths(node.left, targetSum - node.val, new List<int>(subset), paths);
+            FindPaths(node.right, targetSum - node.val, new List<int>(subset), paths);
         }
     }
 }

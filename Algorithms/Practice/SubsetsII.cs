@@ -5,200 +5,146 @@ using System.Linq;
 
 namespace Datastructure.Algorithms.Practice
 {
+    /// <summary>
+    /// Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
+    /// The solution set must not contain duplicate subsets.Return the solution in any order.
+    /// </summary>
+    /// 
     class SubsetsII
     {
         public static void Test()
         {
             int[] nums = new int[] { 1, 2, 2 };
-            SubsetsWithDup(nums);
-        }
-
-        public static IList<IList<int>> SubsetsWithDup(int[] nums)
-        {
-            //var result = BacktrackingSolution(nums);
-            //var result = ReursiveSolution(nums);
-            var result = BitmaskingSolution(nums);
+            var result = IterativeSolution(nums);
 
             result.ToList().ForEach(x => Console.WriteLine(string.Join(", ", x)));
+        }
+
+        public static IList<IList<int>> ReursiveSolution(int[] nums)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+
+            RecursiveSearch(0, nums, result);
+
             return result;
         }
 
-        /// <summary>
-        /// Determine powerset by recursion
-        /// First traverse to last element to add {} & nums[last] to results
-        /// Then union results with nums[index]
-        /// 
-        /// </summary>
-        /// <param name="nums"></param>
-        /// <returns></returns>
-        public static IList<IList<int>> ReursiveSolution(int[] nums)
-        {
-            if (nums == null || nums.Length == 0)
-            {
-                return new List<IList<int>>();
-            }
-
-            var results = new List<IList<int>>();
-
-            RecursivePowerSet(0, results, nums);
-
-            return results;
-        }
-
-        private static void RecursivePowerSet(int index, List<IList<int>> results, int[] nums)
+        private static void RecursiveSearch(int index, int[] nums, List<IList<int>> result)
         {
             if (index == nums.Length - 1)
             {
-                // Add leaf nodes
-                results.Add(new List<int> { });
-                results.Add(new List<int> { nums[index] });
+                // Returns the last element and empty set
+                result.Add(new List<int> { });
+                result.Add(new List<int> { nums[index] });
             }
             else
             {
-                RecursivePowerSet(index + 1, results, nums);
+                // Recursivsly call to last element
+                RecursiveSearch(index + 1, nums, result);
+                int n = result.Count;
 
-                int n = results.Count;
-
+                // Loop through current results and append nums[index]
                 for (int i = 0; i < n; i++)
                 {
-                    var subset = new List<int>(results[i]);
+                    List<int> subset = new List<int>(result[i]);
 
                     subset.Add(nums[index]);
-                    results.Add(subset);
+                    result.Add(subset);
                 }
             }
         }
 
-        /// <summary>
-        /// Soluve via standard iteration
-        /// 1. Initialize results with empty set
-        /// 2. For each element in nums
-        ///     1. Union results with elemnt
-        ///     2. Add element to results
-        /// </summary>
-        /// <param name="nums"></param>
-        /// <returns></returns>
         public static IList<IList<int>> IterativeSolution(int[] nums)
         {
-            var results = new List<IList<int>>();
+            HashSet<string> seen = new HashSet<string>();
+            List<IList<int>> result = new List<IList<int>>();
 
-            // Add empty set
-            results.Add(new List<int>());
+            // Initialize the empty set
+            result.Add(new List<int>());
 
+            // Iterate over nums (O(N))
             for (int i = 0; i < nums.Length; i++)
             {
-                int n = results.Count();
+                // Union results with result + num[i] O(2^n)
+                int n = result.Count;
+                string hashcode;
+
                 for (int j = 0; j < n; j++)
                 {
-                    var subset = new List<int>(results[j]);
-
+                    var subset = new List<int>(result[j]);
                     subset.Add(nums[i]);
-                    results.Add(subset);
+
+                    hashcode = String.Join(",", subset);
+                    
+                    if (!seen.Contains(hashcode))
+                    {
+                        result.Add(subset); 
+                        seen.Add(hashcode);
+                    }
                 }
             }
 
-            return results;
+            return result;
         }
 
-        /// <summary>
-        /// Return the powerset by implementing a dfs backtracking alogrithm
-        /// First, check if nums is empty
-        /// Second, sort the nums array so duplicates will be in sequence
-        /// 
-        /// Add subset to results
-        /// 
-        /// Iterate from 0 to n - 1
-        ///     1. Check if the elemnt is a duplicate already processed (i.e. no the first element)
-        ///     2. Add element to subset
-        ///     3. Recursivly call dfs to next level
-        ///     4. Remove the lement from subset to processing next branch
-        ///     
-        /// </summary>
-        /// <param name="nums"></param>
-        /// <returns></returns>
         public static IList<IList<int>> BacktrackingSolution(int[] nums)
         {
-            if (nums == null || nums.Length == 0)
-            {
-                return new List<IList<int>> ();
-            }
-
-            // Sort so duplicatse in sequence can be identified by n-1
             Array.Sort(nums);
 
-            var results = new List<IList<int>>();
-            var subset = new List<int>();
+            List<IList<int>> result = new List<IList<int>>();
 
-            Dfs(0, results, subset, nums);
+            DfsBacktracking(0, new List<int>(), nums, result);
 
-            return results;
+            return result;
         }
 
-        private static void Dfs(int start, List<IList<int>> results, List<int> subset, int[] nums)
+        private static void DfsBacktracking(int start, List<int> subset, int[] nums, List<IList<int>> result)
         {
-            // Add the subset to results
-            results.Add(new List<int>(subset));
-            Console.WriteLine(string.Join(", ", subset));
+            result.Add(subset);
 
-            // Iterate over nums
-            for (int i = start; i < nums.Length; i++)
+            for(int i = start; i < nums.Length; i++)
             {
-                // Check for duplicates after atleast the first element is processed
+                // Check for duplicates
                 if (i > start && nums[i] == nums[i - 1])
                 {
-                    // Duplicate element, skip
                     continue;
                 }
 
                 subset.Add(nums[i]);
-                Dfs(i + 1, results, subset, nums);
-
-                // Remove last element to process next branch
+                DfsBacktracking(i + 1, new List<int>(subset), nums, result);
                 subset.RemoveAt(subset.Count - 1);
             }
         }
 
         public static IList<IList<int>> SampleSolution(int[] nums)
         {
-            Array.Sort(nums);
-
-            IList<IList<int>> subsets = new List<IList<int>>();
-            subsets.Add(new List<int>());
-
-            int startIndex = 0;
-            int endIndex = 0;
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                startIndex = 0;
-
-                if (i > 0 && nums[i] == nums[i - 1])
-                {
-                    startIndex = endIndex + 1;
-                }
-
-                endIndex = subsets.Count - 1;
-
-                for (int j = startIndex; j <= endIndex; j++)
-                {
-                    IList<int> subset = new List<int>(subsets[j]);
-                    subset.Add(nums[i]);
-                    subsets.Add(subset);
-                }
-            }
-
-            return subsets;
+            throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Use bit masking to generate all possible combinations
+        /// Calcualte max number of subsets (total bitmasks)
+        /// For each bitmask, loop over nums
+        /// if jth is set add to subset
+        /// 
+        /// return subset
+        /// O(n * n^2)
+        /// 
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
         public static IList<IList<int>> BitmaskingSolution(int[] nums)
         {
-            Array.Sort(nums);
+            if (nums == null || nums.Length == 0)
+            {
+                return new List<IList<int>>();
+            }
 
             int n = nums.Length;
             int max = (int)Math.Pow(2, n);
 
-            List<IList<int>> results = new List<IList<int>>();
-            HashSet<string> seen = new HashSet<string>();
+            var seen = new HashSet<string>();
+            var results = new List<IList<int>>();
 
             for (int index = 0; index < max; index++)
             {
@@ -221,7 +167,7 @@ namespace Datastructure.Algorithms.Practice
                 {
                     results.Add(subset);
                     seen.Add(hashcode.ToString());
-                }
+                }   
             }
 
             return results;
