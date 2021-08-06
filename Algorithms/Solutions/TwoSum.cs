@@ -15,11 +15,11 @@ namespace Datastructure.Algorithms.Solutions
     {
         public static void Test()
         {
-            //var array = new int[] { 3, 2, 4 };
-            //int sum = 6;
-            
-            var array = new int[] { 2, 7, 11, 15 };
-            int sum = 9;
+            var array = new int[] { 3, 2, 4 };
+            int sum = 6;
+
+            //var array = new int[] { 2, 7, 11, 15 };
+            //int sum = 9;
 
             var result = Solution(array, sum);
 
@@ -30,6 +30,7 @@ namespace Datastructure.Algorithms.Solutions
             }
         }
 
+        // O(n)
         public static int[] Solution(int[] nums, int target)
         {
             Dictionary<int, int> seen = new Dictionary<int, int>();

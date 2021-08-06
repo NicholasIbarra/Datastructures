@@ -67,6 +67,7 @@ namespace Datastructure.Algorithms.Solutions
             // Reduce idle_time with additiion task taht can tak that timeslot
             for (int i = freq.Length - 2; i >= 0 && idle_max > 0; i--)
             {
+                // Min is becuase you can only take one idle space 
                 idle_max -= Math.Min(f_max - 1, freq[i]);
             }
 

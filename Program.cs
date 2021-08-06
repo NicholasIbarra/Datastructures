@@ -10,7 +10,7 @@ namespace Datastructure
         static void Main(string[] args)
         {
             //AddTwoNumbers.Test1();
-            DivideTwoIntegers.Test();
+            Datastructure.Algorithms.Practice.TaskScheduler.Test();
         }
     }
 }

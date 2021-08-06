@@ -36,9 +36,7 @@ namespace Datastructure.Algorithms.Practice
 
             for (int i = 0; i < nums.Length; i++)
             {
-                // a + b = target
-                // a = target - b; b = nums[index]
-
+                // a + b = target; a = target - b; b = nums[i]
                 int b = nums[i];
                 int a = target - b;
 
@@ -47,10 +45,17 @@ namespace Datastructure.Algorithms.Practice
                     return new int[] { seen[a], i };
                 }
 
-                seen.Add(b, i);
+                seen.Add(a, i);
             }
 
-            return new int[2];
+            return null;
         }
+
+        /*
+         public static int[] Solution(int[] nums, int target)
+        {
+            throw new NotImplementedException();
+        }
+        */
     }
 }

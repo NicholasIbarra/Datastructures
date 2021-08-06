@@ -59,48 +59,25 @@ namespace Datastructure.Algorithms.Practice
             result.ToList().ForEach(x => Console.WriteLine(string.Join(", ", x)));
         }
 
-        /// <summary>
-        /// Utilize a DFS to find the root to leafe path that equals the target sum
-        /// Recurrsiv call of findPath 
-        /// if node = null, return
-        /// Add node.val to current path
-        /// if node.val == target sum && left\right null, add to result
-        /// 
-        /// else recursion on node.left && node.right
-        /// 
-        /// </summary>
-        /// <param name="root"></param>
-        /// <param name="targetSum"></param>
-        /// <returns></returns>
         public static IList<IList<int>> PathSum(TreeNode root, int targetSum)
         {
-            List<IList<int>> paths = new List<IList<int>>();
-            FindPaths(root, targetSum, new List<int>(), paths);
-
-            return paths;
+            throw new NotImplementedException();
         }
 
         private static void FindPaths(TreeNode node, int targetSum, List<int> subset, List<IList<int>> paths)
         {
-            // Base case
-            if (node == null)
-            {
-                return;
-            }
-
-            // Add node value to current subset path
-            subset.Add(node.val);
-
-            // Check for taget solution
-            if (node.val == targetSum && node.left == null && node.right == null)
-            {
-                paths.Add(subset);
-                return;
-            }
-
-            // Search left and right side of tree
-            FindPaths(node.left, targetSum - node.val, new List<int>(subset), paths);
-            FindPaths(node.right, targetSum - node.val, new List<int>(subset), paths);
+            throw new NotImplementedException();
         }
+        /*
+        public static IList<IList<int>> PathSum(TreeNode root, int targetSum)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void FindPaths(TreeNode node, int targetSum, List<int> subset, List<IList<int>> paths)
+        {
+            throw new NotImplementedException();
+        }
+         */
     }
 }
