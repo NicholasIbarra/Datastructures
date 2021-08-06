@@ -23,11 +23,47 @@ namespace Datastructure.Algorithms.Solutions
         public static void Test()
         {
             var piles = new int[] { 5, 3, 4, 5 };
-            Console.WriteLine(StoneGame(piles));
+            Console.WriteLine(DynamicProgrammingSolution(piles));
         }
 
-        public static bool StoneGame(int[] piles)
+        /// <summary>
+        /// Solve via dynmic programming
+        /// This is because you can break the problem into sub problems
+        /// 
+        /// Time complexity: O(n^2)
+        /// Space complexity: O(n^2)
+        /// </summary>
+        /// <param name="piles"></param>
+        /// <returns></returns>
+        public static bool DynamicProgrammingSolution(int[] piles)
         {
+            return dp(0, piles.Length - 1, piles) > 0;
+        }
+
+        public static int dp(int i, int j, int[] piles)
+        {
+            if (i > j)
+            {
+                return 0;
+            }
+
+            if ((j - i) % 2 != 0)
+            {
+                // Alex turn
+                return Math.Max(piles[i] + dp(i + 1, j, piles), piles[j] + dp(i, j - 1, piles));
+            }
+            else
+            {
+                // Lee turn
+                return Math.Min(-piles[i] + dp(i + 1, j, piles), -piles[j] + dp(i, j - 1, piles));
+            }
+        }
+
+
+        public static bool MathmaticalSolution(int[] piles)
+        {
+            // piles are always even and alex always goes first
+            // if odd indexes are white and even are black, alex always has the option to take all black or all white
             return true;
         }
 
