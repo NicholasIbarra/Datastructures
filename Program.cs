@@ -10,8 +10,8 @@ namespace Datastructure
         static void Main(string[] args)
         {
             //AddTwoNumbers.Test1();
-            //Datastructure.Algorithms.Practice.TaskScheduler.Test();
-            NTreeLevelOrderTraversal.Test();
+            Datastructure.Algorithms.Practice.DivideTwoIntegers.Test();
+            //NTreeLevelOrderTraversal.Test();
         }
     }
 }

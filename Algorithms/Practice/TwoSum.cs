@@ -15,11 +15,11 @@ namespace Datastructure.Algorithms.Practice
     {
         public static void Test()
         {
-            //var array = new int[] { 3, 2, 4 };
-            //int sum = 6;
+            var array = new int[] { 3, 2, 4 };
+            int sum = 6;
 
-            var array = new int[] { 2, 7, 11, 15 };
-            int sum = 9;
+            //var array = new int[] { 2, 7, 11, 15 };
+            //int sum = 9;
 
             var result = Solution(array, sum);
 
@@ -32,23 +32,7 @@ namespace Datastructure.Algorithms.Practice
 
         public static int[] Solution(int[] nums, int target)
         {
-            Dictionary<int, int> seen = new Dictionary<int, int>();
-
-            for (int i = 0; i < nums.Length; i++)
-            {
-                // a + b = target; a = target - b; b = nums[i]
-                int b = nums[i];
-                int a = target - b;
-
-                if (seen.ContainsKey(a))
-                {
-                    return new int[] { seen[a], i };
-                }
-
-                seen.Add(a, i);
-            }
-
-            return null;
+            throw new NotImplementedException();
         }
 
         /*

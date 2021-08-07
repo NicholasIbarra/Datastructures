@@ -249,51 +249,51 @@ namespace Datastructure.Algorithms.Solutions
         /// <returns></returns>
         public static int AddingPowersOfTwoBitShifting(int dividend, int divisor)
         {
-        if (dividend == int.MaxValue && divisor == -1)
-        {
-            return int.MaxValue;
-        }
-
-        // Convert to negatives
-        int negatives = 2;
-            
-        if (dividend > 0)
-        {
-            negatives--;
-            dividend = -dividend;
-        }
-
-        if (divisor > 0)
-        {
-            negatives--;
-            divisor = -divisor;
-        }
-
-        // Find the max power of twos 
-        int highestDouble = divisor;
-        int highestPowerOfTwo = -1;
-
-        while (highestDouble >= HALF_INT_MIN && dividend <= highestDouble + highestDouble)
-        {
-            highestDouble += highestDouble;
-            highestPowerOfTwo += highestPowerOfTwo;
-        }
-
-        int quotient = 0;
-
-        while (dividend <= divisor)
-        {
-            if (dividend <= highestDouble)
+            if (dividend == int.MaxValue && divisor == -1)
             {
-                dividend -= highestDouble;
-                quotient += highestPowerOfTwo;
+                return int.MaxValue;
             }
 
-            highestDouble >>= 1;
-            highestPowerOfTwo >>= 1;
-        }
+            // Convert to negatives
+            int negatives = 2;
+            
+            if (dividend > 0)
+            {
+                negatives--;
+                dividend = -dividend;
+            }
 
-        return negatives != 1 ? -quotient : quotient;
+            if (divisor > 0)
+            {
+                negatives--;
+                divisor = -divisor;
+            }
+
+            // Find the max power of twos 
+            int highestDouble = divisor;
+            int highestPowerOfTwo = -1;
+
+            while (highestDouble >= HALF_INT_MIN && dividend <= highestDouble + highestDouble)
+            {
+                highestDouble += highestDouble;
+                highestPowerOfTwo += highestPowerOfTwo;
+            }
+
+            int quotient = 0;
+
+            while (dividend <= divisor)
+            {
+                if (dividend <= highestDouble)
+                {
+                    dividend -= highestDouble;
+                    quotient += highestPowerOfTwo;
+                }
+
+                highestDouble >>= 1;
+                highestPowerOfTwo >>= 1;
+            }
+
+            return negatives != 1 ? -quotient : quotient;
         }
     }
 }

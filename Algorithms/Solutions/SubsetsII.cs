@@ -8,13 +8,16 @@ namespace Datastructure.Solutions
     /// <summary>
     /// Given an integer array nums that may contain duplicates, return all possible subsets (the power set).
     /// The solution set must not contain duplicate subsets.Return the solution in any order.
+    /// 
+    /// https://leetcode.com/problems/subsets-ii/
     /// </summary>
     /// 
     class SubsetsII
     {
         public static void Test()
         {
-            int[] nums = new int[] { 2, 1, 2 };
+            int[] nums = new int[] {1, 2, 2 };
+            //int[] nums = new int[] { 1, 2, 3 };
             var result = SubsetsWithDup(nums);
         }
 
