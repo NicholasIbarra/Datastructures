@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Datastructure.Algorithms.Solutions
+namespace Datastructure.Algorithms.Practice
 {
     /// <summary>
     /// Given an n-ary tree, return the level order traversal of its nodes' values.
@@ -56,31 +56,22 @@ namespace Datastructure.Algorithms.Solutions
 
         public static IList<IList<int>> LevelOrder(Node root)
         {
-            var result = new List<IList<int>>();
-
-            if (root == null) return result;
+            List<IList<int>> result = new List<IList<int>>();
 
             Queue<Node> queue = new Queue<Node>();
             queue.Enqueue(root);
 
-            while(queue.Count > 0)
+            while (queue.Count > 0)
             {
                 List<int> subset = new List<int>();
-                int size = queue.Count;
+                int n = queue.Count;
 
-                for (int i = 0; i < size; i++)
+                for(int i = 0; i < n; i++)
                 {
                     Node node = queue.Dequeue();
                     subset.Add(node.val);
 
-                    if (node.children != null)
-                    {
-                        foreach (Node child in node.children)
-                        {
-                            queue.Enqueue(child);
-                        }
-                    }
-                    
+                    queue.AddRange(node.children);
                 }
 
                 result.Add(subset);
@@ -88,31 +79,10 @@ namespace Datastructure.Algorithms.Solutions
 
             return result;
         }
+    }
 
-        public static IList<IList<int>> RecursionSolution(Node root)
-        {
-            var result = new List<IList<int>>();
-
-            traverseNode(root, 0, result);
-
-            return result;
-        }
-
-        private static void traverseNode(Node node, int level, List<IList<int>> result)
-        {
-            if (result.Count <= level)
-            {
-                result.Add(new List<int>());
-            }
-
-            result[level].Add(node.val);
-
-            foreach (Node child in node.children ?? new List<Node>())
-            {
-                traverseNode(child, level + 1, result);
-            }
-        }
-
+    public static class Extensions
+    {
         public static void AddRange<T>(this Queue<T> queue, IEnumerable<T> enu)
         {
             if (enu == null)
