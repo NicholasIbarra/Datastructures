@@ -37,7 +37,7 @@ namespace Datastructure.Algorithms.Solutions
             Console.WriteLine(result);
         }
 
-        int max = 0;
+        int max = int.MinValue;
         public int MaxPathSum(TreeNode root)
         {
             PathSum(root);
