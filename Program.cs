@@ -10,8 +10,8 @@ namespace Datastructure
         static void Main(string[] args)
         {
             //AddTwoNumbers.Test1();
-            ///Datastructure.Algorithms.Practice.NTreeLevelOrderTraversal*.Test();
-            KClosestPointstoOrigin.Test();
+            Datastructure.Algorithms.Practice.BinarySearchTreeIterator.Test();
+            //BinarySearchTreeIterator.Test();
         }
     }
 }
