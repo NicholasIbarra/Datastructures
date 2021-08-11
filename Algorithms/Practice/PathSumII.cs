@@ -59,25 +59,33 @@ namespace Datastructure.Algorithms.Practice
             result.ToList().ForEach(x => Console.WriteLine(string.Join(", ", x)));
         }
 
-        public static IList<IList<int>> PathSum(TreeNode root, int targetSum)
+        private static IList<IList<int>> PathSum(TreeNode root, int targetSum)
         {
-            throw new NotImplementedException();
+            List<IList<int>> result = new List<IList<int>>();
+
+            if (root == null) return result;
+
+            var subset = new List<int>();
+            FindPath(root, subset, result, targetSum);
+
+            return result;
         }
 
-        private static void FindPaths(TreeNode node, int targetSum, List<int> subset, List<IList<int>> paths)
+        private static void FindPath(TreeNode root, List<int> subset, List<IList<int>> result, int targetSum)
         {
-            throw new NotImplementedException();
-        }
-        /*
-        public static IList<IList<int>> PathSum(TreeNode root, int targetSum)
-        {
-            throw new NotImplementedException();
-        }
+            if (root == null)
+                return;
 
-        private static void FindPaths(TreeNode node, int targetSum, List<int> subset, List<IList<int>> paths)
-        {
-            throw new NotImplementedException();
+            subset.Add(root.val);
+
+            if (root.val == targetSum && root.left == null && root.right == null)
+            {
+                result.Add(subset);
+                return;
+            }
+
+            FindPath(root.left, new List<int>(subset), result, targetSum - root.val);
+            FindPath(root.right, new List<int>(subset), result, targetSum- root.val);
         }
-         */
     }
 }

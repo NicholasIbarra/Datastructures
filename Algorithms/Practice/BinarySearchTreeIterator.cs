@@ -62,38 +62,38 @@ namespace Datastructure.Algorithms.Practice
 
         class BSTIterator
         {
-            Stack<TreeNode> nodes;
+            Stack<TreeNode> stack;
 
             public BSTIterator(TreeNode root)
             {
-                nodes = new Stack<TreeNode>();
-                _HasLeftNodes(root);
+                stack = new Stack<TreeNode>();
+                _InOrder(root);
             }
 
-            private void _HasLeftNodes(TreeNode root)
+            private void _InOrder(TreeNode node)
             {
-                while (root != null)
+                while (node != null)
                 {
-                    nodes.Push(root);
-                    root = root.left;
+                    stack.Push(node);
+                    node = node.left;
                 }
             }
 
             public int Next()
             {
-                TreeNode current = nodes.Pop();
+                TreeNode min = stack.Pop();
 
-                if (current.right != null)
+                if (min.right != null)
                 {
-                    _HasLeftNodes(current.right);
+                    _InOrder(min.right);
                 }
 
-                return current.val;
+                return min.val;
             }
 
             public bool HasNext()
             {
-                return nodes.Count > 0;
+                return stack.Count > 0;
             }
         }
 

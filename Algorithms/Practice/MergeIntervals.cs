@@ -17,12 +17,14 @@ namespace Datastructure.Algorithms.Practice
         {
             MergeIntervals solution = new MergeIntervals();
 
-            //var i1 = new int[] { 1, 3 };
-            //var i2 = new int[] { 2, 6 };
-            //var i3 = new int[] { 8, 10 };
-            //var i4 = new int[] { 15, 18 };
+            var ii1 = new int[] { 1, 3 };
+            var ii2 = new int[] { 2, 6 };
+            var ii3 = new int[] { 8, 10 };
+            var ii4 = new int[] { 15, 18 };
 
-            //int[][] intervals = new int[][] { i1, i2, i3, i4 };
+            int[][] intervals1 = new int[][] { ii1, ii2, ii3, ii4 };
+
+            solution.Merge(intervals1).ToList().ForEach(i => Console.WriteLine(String.Join(",", i)));
 
             var i1 = new int[] { 1, 4 };
             var i2 = new int[] { 0, 4 };

@@ -9,6 +9,8 @@ namespace Datastructure.Algorithms.Practice
     /// Given an n-ary tree, return the level order traversal of its nodes' values.
     /// 
     /// Nary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value(See examples).
+    /// 
+    /// https://leetcode.com/problems/n-ary-tree-level-order-traversal/
     /// </summary>
     public static class NTreeLevelOrderTraversal
     {
@@ -56,40 +58,8 @@ namespace Datastructure.Algorithms.Practice
 
         public static IList<IList<int>> LevelOrder(Node root)
         {
-            List<IList<int>> result = new List<IList<int>>();
-
-            Queue<Node> queue = new Queue<Node>();
-            queue.Enqueue(root);
-
-            while (queue.Count > 0)
-            {
-                List<int> subset = new List<int>();
-                int n = queue.Count;
-
-                for(int i = 0; i < n; i++)
-                {
-                    Node node = queue.Dequeue();
-                    subset.Add(node.val);
-
-                    queue.AddRange(node.children);
-                }
-
-                result.Add(subset);
-            }
-
-            return result;
+            throw new NotImplementedException();
         }
     }
 
-    public static class Extensions
-    {
-        public static void AddRange<T>(this Queue<T> queue, IEnumerable<T> enu)
-        {
-            if (enu == null)
-                return;
-
-            foreach (T obj in enu)
-                queue.Enqueue(obj);
-        }
-    }
 }

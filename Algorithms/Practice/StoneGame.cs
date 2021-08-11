@@ -23,41 +23,12 @@ namespace Datastructure.Algorithms.Practice
         public static void Test()
         {
             var piles = new int[] { 5, 3, 4, 5 };
-            Console.WriteLine(DynamicProgrammingSolution(piles));
+            Console.WriteLine(Solution(piles));
         }
 
-        public static bool DynamicProgrammingSolution(int[] piles)
+        private static bool Solution(int[] piles)
         {
             throw new NotImplementedException();
         }
-
-        public static int dp(int i, int j, int[] piles)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public static bool MathmaticalSolution(int[] piles)
-        {
-            throw new NotImplementedException();
-        }
-
-/*
-        public static bool DynamicProgrammingSolution(int[] piles)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static int dp(int i, int j, int[] piles)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public static bool MathmaticalSolution(int[] piles)
-        {
-            throw new NotImplementedException();
-        }
-*/
     }
 }

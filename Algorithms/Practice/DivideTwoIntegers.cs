@@ -20,12 +20,11 @@ namespace Datastructure.Algorithms.Practice
     /// </summary>
     public static class DivideTwoIntegers
     {
-
-        private static int HALF_INT_MIN = -1073741824;
-
         public static void Test()
         {
-            int dividend = 7000;
+            Console.WriteLine(Solution(-50, -5));
+
+            int dividend = -7000;
             int divisor = 313;
 
             // 22
@@ -34,65 +33,9 @@ namespace Datastructure.Algorithms.Practice
             Console.WriteLine(result);
         }
 
-
-        /// <summary>
-        /// Edge Cases and Scenarios
-        /// 
-        /// Negative States
-        /// neg * pos = neg
-        /// neg * neg = pos
-        /// pos * pos = pos
-        /// 
-        /// </summary>
-        /// <param name="dividend"></param>
-        /// <param name="divisor"></param>
-        /// <returns></returns>
-        private static int Solution(int dividend, int divisor)
+        private static int Solution(int number, int divingBy)
         {
-            // Overflow
-            if (dividend == int.MaxValue && divisor == -1)
-            {
-                return int.MaxValue;
-            }
-
-            int negatives = 2;
-
-            if (dividend > 0)
-            {
-                dividend = -dividend;
-                negatives--;
-            }
-
-            if (divisor > 0)
-            {
-                divisor = -divisor;
-                negatives--;
-            }
-
-            int highestPowerOFtwo = -1;
-            int highestDoubles = divisor;
-
-            while (dividend <= highestDoubles + highestDoubles)
-            {
-                highestPowerOFtwo += highestPowerOFtwo;
-                highestDoubles += highestDoubles;
-            }
-
-            int quotient = 0;
-
-            while (dividend <= divisor)
-            {
-                if (dividend <= highestDoubles)
-                {
-                    dividend -= highestDoubles;
-                    quotient += highestPowerOFtwo;
-                }
-
-                highestDoubles >>= 1;
-                highestPowerOFtwo >>= 1;
-            }
-
-            return quotient;
+            throw new NotImplementedException();
         }
     }
 }
