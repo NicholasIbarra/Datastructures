@@ -10,7 +10,7 @@ namespace Datastructure
         static void Main(string[] args)
         {
             //AddTwoNumbers.Test1();
-            Datastructure.Algorithms.Practice.BinarySearchTreeIterator.Test();
+            Datastructure.Algorithms.Practice.SubArrayEqualsK.Test();
             //BinarySearchTreeIterator.Test();
         }
     }

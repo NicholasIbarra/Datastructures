@@ -1,16 +1,18 @@
 ﻿namespace Datastructure.Algorithms.Solutions
 {
-    public class ListNode {
-        public int val;
-        public ListNode next;
-        public ListNode(int val=0, ListNode next=null) {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
-    public class AddTwoNumers
+    class AddTwoNumers
     {
+        class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int val = 0, ListNode next = null)
+            {
+                this.val = val;
+                this.next = next;
+            }
+        }
+        
         public static void Test()
         {
             ListNode n1 = new ListNode(2);
@@ -31,7 +33,7 @@
             ListNode result = solution.AddTwoNumbers(n1, m1);
         }
 
-        public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+        ListNode AddTwoNumbers(ListNode l1, ListNode l2)
         {
             ListNode dummyHead = new ListNode(0);
 

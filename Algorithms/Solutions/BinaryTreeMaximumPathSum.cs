@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Datastructure.Algorithms.Solutions
 {
-    public class BinaryTreeMaximumPathSum
+    class BinaryTreeMaximumPathSum
     {
-        public class TreeNode
+        class TreeNode
         {
             public int val;
             public TreeNode left;
@@ -38,14 +38,13 @@ namespace Datastructure.Algorithms.Solutions
         }
 
         int max = int.MinValue;
-        public int MaxPathSum(TreeNode root)
+        int MaxPathSum(TreeNode root)
         {
             PathSum(root);
             return max;
-
         }
 
-        public int PathSum(TreeNode node)
+        int PathSum(TreeNode node)
         {
             if (node == null) return 0;
 

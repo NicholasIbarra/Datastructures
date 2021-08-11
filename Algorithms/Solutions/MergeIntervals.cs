@@ -36,28 +36,27 @@ namespace Datastructure.Algorithms.Solutions
 
         public int[][] Merge(int[][] intervals)
         {
-            Array.Sort(intervals, (a, b) => a[0] - b[0]);
-            int startIndex = -1, endIndex = -1;
-
             List<int[]> result = new List<int[]>();
 
+            int endIndex = int.MinValue;
+
+            // O(log n)
+            Array.Sort(intervals, (a, b) => a[0] - b[0]);
+
+            // O(N - 1) -> O(N)
             for (int i = 0; i < intervals.Length; i++)
             {
                 int[] current = intervals[i];
-                
-                if(current[0] > endIndex)
+
+                if (current[0] > endIndex)
                 {
                     result.Add(current);
-
-                    startIndex = current[0];
                     endIndex = current[1];
                 }
-                else if(current[1] > endIndex)
+                else if (current[1] > endIndex)
                 {
-                    int n = result.Count - 1;
+                    result[result.Count - 1][1] = current[1];
                     endIndex = current[1];
-
-                    result[n][1] = endIndex;
                 }
             }
 

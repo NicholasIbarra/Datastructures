@@ -16,7 +16,7 @@ namespace Datastructure.Algorithms.Solutions
     /// 
     /// Assuming Alex and Lee play optimally, return True if and only if Alex wins the game.
     /// 
-    /// https://leetcode.com/explore/challenge/card/august-leetcoding-challenge-2021/613/week-1-august-1st-august-7th/3870/
+    /// https://leetcode.com/problems/stone-game/
     /// </summary>
     static class StoneGame
     {
