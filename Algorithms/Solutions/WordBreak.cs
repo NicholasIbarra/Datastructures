@@ -16,7 +16,7 @@ namespace Datastructure.Algorithms.Solutions
     {
         public static void Test()
         {
-            string input = "catsanddog";
+            string input = "catsandog";
             List<string> dictionary = new List<string> { "and", "cats", "dog", "sand", "cat" };
 
             //string input = "cars";
@@ -24,35 +24,6 @@ namespace Datastructure.Algorithms.Solutions
 
             WordBreak solution = new WordBreak();
             Console.WriteLine(solution.DynamicProgrammingSolution(input, dictionary));
-        }
-
-        public bool WordBreakSolution(string s, IList<string> wordDict)
-        {
-            return RecursionSolution(s, new HashSet<string>(wordDict), 0, new bool?[s.Length]);
-        }
-
-        private bool RecursionSolution(string s, HashSet<string> wordDict, int start, bool?[] memo)
-        {
-            if (start == s.Length)
-            {
-                return true;
-            }
-
-            if (memo[start] != null)
-            {
-                return memo[start].Value;
-            }
-
-            for (int end = start + 1; end <= s.Length; end++)
-            {
-                var substring = s.Substring(start, end - start);
-                if (wordDict.Contains(substring) && RecursionSolution(s, wordDict, end, memo))
-                {
-                    return memo[start].Value == true;
-                }
-            }
-
-            return false;
         }
 
         public bool BreadthFirstSolution(string s, IList<string> wordDict)
@@ -89,7 +60,6 @@ namespace Datastructure.Algorithms.Solutions
 
         public bool DynamicProgrammingSolution(string s, IList<string> wordDict)
         {
-            HashSet<string> wordDictSet = new HashSet<string>(wordDict);
             bool[] dp = new bool[s.Length + 1];
             dp[0] = true; // null string
 
@@ -98,7 +68,7 @@ namespace Datastructure.Algorithms.Solutions
                 for(int j = 0; j < i; j++)
                 {
                     string substring = s.Substring(j, i - j);
-                    if (dp[j] && wordDictSet.Contains(substring))
+                    if (dp[j] && wordDict.Contains(substring))
                     {
                         dp[i] = true;
                         break; 
