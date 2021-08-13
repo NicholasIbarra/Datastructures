@@ -30,14 +30,10 @@ namespace Datastructure.Algorithms.Practice
                     string substring = s.Substring(j, i - j);
                     if (dp[j] && dictionary.Contains(substring))
                     {
-                        Console.WriteLine("[X]" + substring + " dp[j]: " + j + dp[j] + " dp[i]:" + i + dp[i]);
                         dp[i] = true;
                         break;
                     }
-
-                    Console.WriteLine("[ ]" + substring + " dp[j]: " + j + dp[j] + " dp[i]:" + i + dp[i]);
                 }
-                Console.WriteLine("--------------------------");
             }
 
             return dp[s.Length];

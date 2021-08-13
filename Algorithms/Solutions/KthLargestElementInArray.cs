@@ -8,9 +8,13 @@ namespace Datastructure.Algorithms.Solutions
     Given an integer array nums and an integer k, return the kth largest element in the array.
 
     Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+    https://leetcode.com/problems/kth-largest-element-in-an-array/
     */
     class KthLargestElementInArray
     {
+        static Random random = new Random();
+
         public static void Test()
         {
             KthLargestElementInArray solution = new KthLargestElementInArray();
@@ -28,10 +32,13 @@ namespace Datastructure.Algorithms.Solutions
             return QuickSelect(nums, nums.Length - k);
         }
 
-        public int QuickSelect(int[] nums, int k)
+        private int QuickSelect(int[] nums, int k)
         {
             int lo = 0;
             int hi = nums.Length - 1;
+
+            //shuffle(nums);
+
             while (lo < hi)
             {
                 int j = partition(nums, lo, hi);
@@ -48,6 +55,7 @@ namespace Datastructure.Algorithms.Solutions
                     break;
                 }
             }
+
             return nums[k];
         }
 
@@ -55,30 +63,40 @@ namespace Datastructure.Algorithms.Solutions
         {
             int i = lo;
             int j = hi + 1;
+
             while (true)
             {
-                while (i < hi && less(nums[++i], nums[lo]));
-                    while (j > lo && less(nums[lo], nums[--j]));
-                        if (i >= j)
-                        {
-                            break;
-                        }
+                while (i < hi && nums[++i] < nums[lo]) ;
+                while (j > lo && nums[lo] < nums[--j]) ;
+
+                if (i >= j)
+                {
+                    break;
+                }
+
                 exch(nums, i, j);
             }
+
             exch(nums, lo, j);
             return j;
         }
 
-        private void exch(int[] a, int i, int j)
+
+        private void shuffle(int[] a)
         {
-            int tmp = a[i];
-            a[i] = a[j];
-            a[j] = tmp;
+            for (int ind = 1; ind < a.Length; ind++)
+            {
+                int r = random.Next(ind + 1);
+                exch(a, ind, r);
+            }
         }
 
-        private bool less(int v, int w)
+        private void exch(int[] nums, int i, int j)
         {
-            return v < w;
+            int tmp = nums[i];
+
+            nums[i] = nums[j];
+            nums[j] = tmp;
         }
     }
 }

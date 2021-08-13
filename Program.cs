@@ -9,8 +9,9 @@ namespace Datastructure
     {
         static void Main(string[] args)
         {
-            Datastructure.Algorithms.Practice.KthLargestElementInArray.Test();
-            //KthLargestElementInArray.Test();
+            BinaryTreeRightSideView.Test(); 
+            Datastructure.Algorithms.Practice.BinaryTreeRightSideView.Test();
+            
         }
     }
 }

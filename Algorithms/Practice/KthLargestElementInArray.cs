@@ -13,8 +13,6 @@ namespace Datastructure.Algorithms.Practice
 
     class KthLargestElementInArray
     {
-        static Random random = new Random();
-
         public static void Test()
         {
             KthLargestElementInArray solution = new KthLargestElementInArray();
@@ -28,21 +26,23 @@ namespace Datastructure.Algorithms.Practice
 
         public int FindKthLargest(int[] nums, int k)
         {
-            // https://en.wikipedia.org/wiki/Quickselect
-            return QuickSelect(nums, nums.Length - k);
+            //throw new NotImplementedException();
+
+            // Find the (N-k)th smallest
+            // Quick sort returns O(N)
+
+            k = (nums.Length - k);
+            return QuickSort(nums, k);
         }
 
-        private int QuickSelect(int[] nums, int k)
+        private int QuickSort(int[] nums, int k)
         {
-            int lo = 0;
-            int hi = nums.Length - 1;
-
-            //shuffle(nums);
-            Console.WriteLine("LO: " + lo + " HI: " + hi + " -> " + String.Join(',', nums));
+            int lo = 0, hi = nums.Length - 1;
 
             while (lo < hi)
             {
                 int j = partition(nums, lo, hi);
+
                 if (j < k)
                 {
                     lo = j + 1;
@@ -55,11 +55,8 @@ namespace Datastructure.Algorithms.Practice
                 {
                     break;
                 }
-
-                Console.WriteLine("LO: " + lo + " HI: " + hi + " -> " + String.Join(',', nums));
             }
 
-            Console.WriteLine("LO: " + lo + " HI: " + hi + " -> " + String.Join(',', nums));
             return nums[k];
         }
 
@@ -70,40 +67,27 @@ namespace Datastructure.Algorithms.Practice
 
             while (true)
             {
-                while (i < hi && nums[++i] < nums[lo]);
-                while (j > lo && nums[lo] < nums[--j]);                
+                while (i < hi && nums[++i] < nums[lo]) ;
+                while (j > lo && nums[lo] < nums[--j]) ;
 
                 if (i >= j)
                 {
                     break;
                 }
 
-                exch(nums, i, j);
+                exchangeElemnts(nums, i, j);
             }
 
-            exch(nums, lo, j);
+            exchangeElemnts(nums, lo, j);
             return j;
         }
 
-
-        private void shuffle(int[] a)
+        private void exchangeElemnts(int[] nums, int i, int j)
         {
-            for (int ind = 1; ind < a.Length; ind++)
-            {
-                int r = random.Next(ind + 1);
-                exch(a, ind, r);
-            }
-        }
-
-        private void exch(int[] nums, int i, int j)
-        {
-            Console.WriteLine("   Exchanging " + nums[i] + "(" + i + ")" + " and " + nums[j] + "(" + j + ")"); 
-            
             int tmp = nums[i];
 
             nums[i] = nums[j];
-            nums[j] = tmp;            
+            nums[j] = tmp;
         }
-        
     }
 }
