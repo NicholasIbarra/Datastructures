@@ -9,11 +9,8 @@ namespace Datastructure
     {
         static void Main(string[] args)
         {
-            //AddTwoNumbers.Test1();
-            //Datastructure.Algorithms.Practice.SubArrayEqualsK.Test();
-            //BinarySearchTreeIterator.Test();
-            Datastructure.Algorithms.Practice.WordBreak.Test();
-            //WordBreak.Test();
+            Datastructure.Algorithms.Practice.KthLargestElementInArray.Test();
+            //KthLargestElementInArray.Test();
         }
     }
 }
