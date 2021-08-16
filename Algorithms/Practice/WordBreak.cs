@@ -15,28 +15,12 @@ namespace Datastructure.Algorithms.Practice
             //List<string> dictionary = new List<string> { "car", "ca", "rs" };
 
             WordBreak solution = new WordBreak();
-            Console.WriteLine(solution.DynamicProgrammingSolution(input, dictionary));
+            Console.WriteLine(solution.Solution(input, dictionary));
         }
 
-        private bool DynamicProgrammingSolution(string s, List<string> dictionary)
+        private bool Solution(string input, List<string> dictionary)
         {
-            bool[] dp = new bool[s.Length + 1];
-            dp[0] = true;
-
-            for (int i = 1; i < s.Length; i++)
-            {
-                for (int j = 0; j < i; j++)
-                {
-                    string substring = s.Substring(j, i - j);
-                    if (dp[j] && dictionary.Contains(substring))
-                    {
-                        dp[i] = true;
-                        break;
-                    }
-                }
-            }
-
-            return dp[s.Length];
+            throw new NotImplementedException();
         }
     }
 }

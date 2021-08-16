@@ -13,7 +13,7 @@ namespace Datastructure.Algorithms.Solutions
     {
         public static void Test()
         {
-            List<string> words = new List<string> { "aba", "abca", "abc" };
+            List<string> words = new List<string> { "aba", "abca", "abc", "atbbga" };
 
             ValidPalindromeII solution = new ValidPalindromeII();
 

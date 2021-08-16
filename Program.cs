@@ -9,9 +9,9 @@ namespace Datastructure
     {
         static void Main(string[] args)
         {
-            BinaryTreeRightSideView.Test(); 
-            Datastructure.Algorithms.Practice.BinaryTreeRightSideView.Test();
-            
+            RemoveInvalidParentheses.Test();
+            //Datastructure.Algorithms.Practice.LowestCommonAncestorOfBinaryTree.Test();
+
         }
     }
 }

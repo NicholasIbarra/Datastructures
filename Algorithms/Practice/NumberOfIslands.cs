@@ -40,36 +40,7 @@ namespace Datastructure.Algorithms.Practice
 
         private int NumIslands(char[][] grid)
         {
-            if (grid == null || grid.Length == 0)
-                return 0;
-
-            int islands = 0;
-
-            for (int r = 0; r < grid.Length; r++)
-            {
-                for (int c = 0; c < grid[r].Length; c++)
-                {
-                    islands += Dfs(grid, r, c);
-                }
-            }
-
-            return islands;
-        }
-
-        private int Dfs(char[][] grid, int r, int c)
-        {
-            if (r < 0 || r >= grid.Length || c < 0 || c >= grid[r].Length || grid[r][c] == '0')
-                return 0;
-
-            grid[r][c] = '0';
-
-            Dfs(grid, r - 1, c);
-            Dfs(grid, r + 1, c);
-            Dfs(grid, r, c + 1);
-            Dfs(grid, r, c - 1);
-
-            return 1;
+            throw new NotImplementedException();
         }
     }
-
 }

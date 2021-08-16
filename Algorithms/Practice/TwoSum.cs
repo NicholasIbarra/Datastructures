@@ -34,12 +34,5 @@ namespace Datastructure.Algorithms.Practice
         {
             throw new NotImplementedException();
         }
-
-        /*
-         public static int[] Solution(int[] nums, int target)
-        {
-            throw new NotImplementedException();
-        }
-        */
     }
 }

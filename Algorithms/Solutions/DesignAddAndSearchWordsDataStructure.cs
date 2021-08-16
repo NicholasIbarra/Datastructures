@@ -66,6 +66,35 @@ namespace Datastructure.Algorithms.Solutions
 
             private bool searchInNode(string word, TrieNode node)
             {
+                for (int i = 0; i < word.Length; ++i)
+                {
+                    char ch = word[i];
+
+                    if (!node.children.ContainsKey(ch))
+                    {
+                        // Check all nodes at this level
+                        if (ch == '.')
+                        {
+                            foreach (char x in node.children.Keys)
+                            {
+                                TrieNode child = node.children[x];
+                                if (searchInNode(word.Substring(i + 1), child))
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+
+                        // if no nodes lead to an answer or the current != '.'
+                        return false;
+                    }
+                    else
+                    {
+                        // if the character is found, go down to the next level
+                        node = node.children[ch];
+                    }
+                }
+
                 return node.isWord;
             }
         }

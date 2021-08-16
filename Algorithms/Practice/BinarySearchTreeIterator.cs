@@ -62,38 +62,18 @@ namespace Datastructure.Algorithms.Practice
 
         class BSTIterator
         {
-            Stack<TreeNode> stack;
-
             public BSTIterator(TreeNode root)
             {
-                stack = new Stack<TreeNode>();
-                _InOrder(root);
-            }
-
-            private void _InOrder(TreeNode node)
-            {
-                while (node != null)
-                {
-                    stack.Push(node);
-                    node = node.left;
-                }
             }
 
             public int Next()
             {
-                TreeNode min = stack.Pop();
-
-                if (min.right != null)
-                {
-                    _InOrder(min.right);
-                }
-
-                return min.val;
+                throw new NotImplementedException();
             }
 
             public bool HasNext()
             {
-                return stack.Count > 0;
+                throw new NotImplementedException();
             }
         }
 
@@ -106,11 +86,12 @@ namespace Datastructure.Algorithms.Practice
 
             public int Next()
             {
+        throw new NotImplementedException();
             }
 
             public bool HasNext()
             {
-
+        throw new NotImplementedException();
             }
         }
         */

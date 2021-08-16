@@ -33,42 +33,9 @@ namespace Datastructure.Algorithms.Practice
 
         }
 
-        private bool IsAlienSorted(string[] words, string order)
+        private bool IsAlienSorted(string[] words3, string order3)
         {
-            Dictionary<char, int> orderMap = new Dictionary<char, int>();
-
-            for (int i = 0; i < order.Length; i++)
-            {
-                orderMap.Add(order[i], i);
-            }
-
-            // traverse
-            // a > b > c, a > c
-            for (int i = 0; i < words.Length - 1; i++)
-            {
-                // traverse the word
-                for(int j = 0; j < words[i].Length; j++)
-                {
-                    // the word is longer then the next
-                    if (j >= words[i + 1].Length) return false;
-
-                    char a = words[i][j];
-                    char b = words[i + 1][j];
-
-                    // letters are differeint
-                    if (a != b)
-                    {
-                        // in correct order
-                        if (orderMap[a] > orderMap[b])
-                            return false;
-                        else
-                            // out of order, stop
-                            break;
-                    }
-                }
-            }
-
-            return true;
+            throw new NotImplementedException();
         }
     }
 }

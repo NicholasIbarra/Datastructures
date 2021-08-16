@@ -43,33 +43,7 @@ namespace Datastructure.Algorithms.Practice
 
         private IList<int> RightSideView(TreeNode root)
         {
-            List<int> result = new List<int>();
-
-            if (root == null) return result;
-
-            Queue<TreeNode> queue = new Queue<TreeNode>();
-            queue.Enqueue(root);
-
-            while (queue.Count > 0)
-            {
-                int nodesOnLevel = queue.Count;
-
-                for (int i = 0; i < nodesOnLevel; i++)
-                {
-                    TreeNode node = queue.Dequeue();
-
-                    if (i == nodesOnLevel - 1)
-                    {
-                        // Laast node on the level
-                        result.Add(node.val);
-                    }
-
-                    if (node.left != null) queue.Enqueue(node.left);
-                    if (node.right != null) queue.Enqueue(node.right);
-                }
-            }
-
-            return result;
+            throw new NotImplementedException();
         }
     }
 }

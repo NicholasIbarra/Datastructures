@@ -31,64 +31,9 @@ namespace Datastructure.Algorithms.Practice
             }
         }
 
-        /// <summary>
-        /// Scenarios
-        /// 
-        /// (()
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
         private string MinRemoveToMakeValid(string s)
         {
-            StringBuilder sb = new StringBuilder();
-
-            int balance = 0;
-            int openBrackets = 0;
-
-            // right most )
-            for (int i = 0; i < s.Length; i++)
-            {
-                char c = s[i];
-
-                if (c == '(')
-                {
-                    openBrackets++;
-                    balance++;
-                }
-                else if (c == ')')
-                {
-                    if (balance > 0)
-                    {
-                        balance--;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
-                sb.Append(c);
-            }
-
-            // left most (
-            Console.WriteLine(sb.ToString());
-            StringBuilder result = new StringBuilder();
-            int openToKkeep = openBrackets - balance;
-
-            for(int i = 0; i < sb.Length; i++)
-            {
-                if (sb[i] == '(')
-                {
-                    openToKkeep--;
-
-                    if (openToKkeep < 0)
-                        continue;
-                }
-
-                result.Append(sb[i]);
-            }
-
-            return result.ToString();
+            throw new NotImplementedException();
         }
     }
 
