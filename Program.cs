@@ -9,8 +9,8 @@ namespace Datastructure
     {
         static void Main(string[] args)
         {
-            RemoveInvalidParenthesesSolution.Test();
-            //Datastructure.Algorithms.Practice.LowestCommonAncestorOfBinaryTree.Test();
+            //RemoveInvalidParenthesesSolution.Test();
+            Datastructure.Algorithms.Practice.AddTwoNumers.Test();
 
         }
     }

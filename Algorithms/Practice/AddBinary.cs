@@ -18,7 +18,7 @@ namespace Datastructure.Algorithms.Practice
             string a = "1010";
             string b = "11";
 
-            Console.WriteLine(solution.AddBinarySolution(a, b));
+            Console.WriteLine(a + " " + b + " = " + solution.AddBinarySolution(a, b));
         }
 
         public string AddBinarySolution(string a, string b)
