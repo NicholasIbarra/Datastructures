@@ -9,7 +9,7 @@ namespace Datastructure
     {
         static void Main(string[] args)
         {
-            Datastructure.Algorithms.Practice.SimplifyPathSolution.Test();
+            RemoveInvalidParenthesesSolution.Test();
             //Datastructure.Algorithms.Practice.LowestCommonAncestorOfBinaryTree.Test();
 
         }
