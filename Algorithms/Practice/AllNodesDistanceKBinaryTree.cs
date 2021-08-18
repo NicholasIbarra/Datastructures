@@ -49,24 +49,9 @@ namespace Datastructure.Algorithms.Practice
             Console.WriteLine(string.Join(",", solution.DistanceK(root, root.left, 2)));
         }
 
-        List<int> answer;
-        TreeNode target;
-        int K;
-
         public IList<int> DistanceK(TreeNode root, TreeNode target, int k)
         {
-            this.answer = new List<int>();
-            this.target = target;
-            this.K = k;
-
-            dfs(root);
-
-            return answer;
-        }
-
-        private void dfs(TreeNode root)
-        {
-            
+            throw new NotImplementedException();
         }
     }
 }
