@@ -36,28 +36,23 @@ namespace Datastructure.Algorithms.Solutions
 
         public int[][] Merge(int[][] intervals)
         {
-            List<int[]> result = new List<int[]>();
+            LinkedList<int[]> result = new LinkedList<int[]>();
 
-            int endIndex = int.MinValue;
+            if (intervals == null || intervals.Length == 0)
+            {
+                return result.ToArray();
+            }
 
-            // O(log n)
             Array.Sort(intervals, (a, b) => a[0] - b[0]);
 
-            // O(N - 1) -> O(N)
-            for (int i = 0; i < intervals.Length; i++)
+            foreach (var current in intervals)
             {
-                int[] current = intervals[i];
+                if (result.Count == 0 || result.Last()[0] < current[0])
+                {
+                    result.Append(current);
+                }
 
-                if (current[0] > endIndex)
-                {
-                    result.Add(current);
-                    endIndex = current[1];
-                }
-                else if (current[1] > endIndex)
-                {
-                    result[result.Count - 1][1] = current[1];
-                    endIndex = current[1];
-                }
+                result.Last()[1] = Math.Max(result.Last()[1], current[1]);
             }
 
             return result.ToArray();

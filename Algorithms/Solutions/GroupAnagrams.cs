@@ -14,25 +14,49 @@ namespace Datastructure.Algorithms.Solutions
 
     https://leetcode.com/problems/group-anagrams/
     */
-    class GroupAnagrams
+    class GroupAnagramsSolution
     {
-        public List<List<String>> groupAnagrams(String[] strs)
+        public static void Test()
         {
-            Dictionary<string, List<string>> map = new Dictionary<string, List<string>>();
+            GroupAnagramsSolution solution = new GroupAnagramsSolution();
+
+            List<string> strs = new List<string> { "eat", "tea", "tan", "ate", "nat", "bat" };
+
+            solution.groupAnagrams(strs.ToArray()).ForEach(x => Console.WriteLine(string.Join(",", x)));
+        }
+
+        public List<List<string>> groupAnagrams(string[] strs)
+        {
+            if (strs == null || strs.Length == 0)
+            {
+                return new List<List<string>>();
+            }
+
+            Dictionary<string, List<string>> answer = new Dictionary<string, List<string>>();
+            int[] count = new int[26];
 
             foreach(string s in strs)
             {
-                char[] ca = s.ToCharArray();
-                Array.Sort(ca);
+                Array.Fill(count, 0);
 
-                string key = string.Join(",", ca);
-                if (!map.ContainsKey(key))
-                    map.Add(key, new List<string>());
+                foreach (char c in s) count[c - 'a']++;
 
-                map[key].Add(s);
+                StringBuilder sb = new StringBuilder();
+
+                for(int i = 0; i < 26; i++)
+                {
+                    sb.Append("#");
+                    sb.Append(count[i]);
+                }
+
+                string key = sb.ToString();
+                if (!answer.ContainsKey(key))
+                    answer.Add(key, new List<string>());
+
+                answer[key].Add(s);
             }
 
-            return map.Values.ToList();
+            return new List<List<string>>(answer.Values);
         }
     }
 }

@@ -67,7 +67,6 @@ namespace Datastructure.Algorithms.Solutions
             // Extending the current operand by 1 digit
             currentOperand = currentOperand * 10 + (long)char.GetNumericValue(num[index]);
             string currentValRep = currentOperand.ToString();
-            int length = num.Length;
 
             // to avoid cases where we have 1 + 05 or 1 * 05 since invalid operand
 

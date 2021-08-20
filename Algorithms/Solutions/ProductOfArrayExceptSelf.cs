@@ -24,7 +24,7 @@ namespace Datastructure.Algorithms.Solutions
 
             foreach(var test in tests)
             {
-                int[] result = ProductExceptSelf(test.ToArray());
+                int[] result = ProductExceptSelfConstantSpace(test.ToArray());
                 Console.WriteLine(string.Join(",", result));
             }
         }

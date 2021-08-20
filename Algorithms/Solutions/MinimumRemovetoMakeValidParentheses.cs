@@ -61,7 +61,7 @@ namespace Datastructure.Algorithms.Solutions
         public string SolutionWithoutStack(string s)
         {
             StringBuilder sb = new StringBuilder();
-            int balance = 0, seenOpen = 0;
+            int balance = 0, seenClosed = 0;
 
             // Remove all invalid ")"
             for(int i = 0; i < s.Length; i++)
@@ -70,15 +70,17 @@ namespace Datastructure.Algorithms.Solutions
 
                 if (c == '(')
                 {
-                    seenOpen++;
                     balance++;
                 }
                 else if (c == ')')
                 {
-                    if (balance > 0)
-                        balance--;
-                    else
+                    if (balance <= 0)
+                    {
                         continue;
+                    }
+
+                    balance--;
+                    seenClosed++;
                 }
 
                 sb.Append(c);
@@ -86,17 +88,17 @@ namespace Datastructure.Algorithms.Solutions
 
             // Remove right most "("
             StringBuilder res = new StringBuilder();
-            int openToKeep = seenOpen - balance;
 
-            for (int i = 0; i < sb.Length; i++)
+            foreach (char c in sb.ToString())
             {
-                if (sb[i] == '(')
+                if (c == '(')
                 {
-                    openToKeep--;
-                    if (openToKeep < 0) continue;
+                    seenClosed--;
+                    if (seenClosed < 0)
+                        continue;
                 }
 
-                res.Append(sb[i]);
+                res.Append(c);
             }
 
             return res.ToString();

@@ -40,7 +40,6 @@ namespace Datastructure.Algorithms.Solutions
             for (int i = 0; i < points.Length; i++)
             {
                 double distance = Math.Pow(Math.Pow((0 - points[i][0]), 2) + Math.Pow((0 - points[i][1]), 2), .5);
-                Console.WriteLine(distance);
             }
 
             return result.ToArray();
