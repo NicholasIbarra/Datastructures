@@ -23,7 +23,7 @@ namespace Datastructure.Algorithms.Solutions
 
             foreach(string s in input)
             {
-                Console.WriteLine(s + ": " + string.Join(",", solution.RemoveInvalidParentheses(s)));
+                Console.WriteLine(s + ": " + string.Join(",", solution.removeInvalidParentheses(s)));
             }
         }
 
@@ -186,7 +186,7 @@ namespace Datastructure.Algorithms.Solutions
             }
         }
 
-        public List<String> removeInvalidParentheses(String s)
+        public List<string> removeInvalidParentheses(string s)
         {
 
             int left = 0, right = 0;

@@ -9,8 +9,8 @@ namespace Datastructure
     {
         static void Main(string[] args)
         {
-            BinarySearchTreeIteratorII.Test();
-            //Datastructure.Algorithms.Practice.BasicCalculatorII.Test();
+            //ProductOfArrayExceptSelf.Test();
+            Datastructure.Algorithms.Practice.RemoveInvalidParentheses.Test();
 
         }
     }

@@ -42,9 +42,35 @@ namespace Datastructure.Algorithms.Practice
             Console.WriteLine("p: 5, q: 4 -> " + solution.LowestCommonAncestor(root, root.left, root.left.right.right).val);
         }
 
+        TreeNode answer;
+
         private TreeNode LowestCommonAncestor(TreeNode root, TreeNode left, TreeNode right)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            TraverseTee(root, left, right);
+
+            return answer;
+
+        }
+
+        private bool TraverseTee(TreeNode node, TreeNode p, TreeNode q)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+
+            int left = TraverseTee(node.left, p, q) ? 1 : 0;
+            int right = TraverseTee(node.right, p, q) ? 1 : 0;
+            int root = (node == p || node == q) ? 1 : 0;
+
+            if ((root + left + right) >= 2)
+            {
+                this.answer = node;
+            }
+
+            return (root + left + right) > 0;
         }
     }
 }

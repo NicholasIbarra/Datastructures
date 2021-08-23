@@ -14,8 +14,17 @@ namespace Datastructure.Algorithms.Practice
 
     https://leetcode.com/problems/group-anagrams/
     */
-    class GroupAnagrams
+    class GroupAnagramsSolution
     {
+        public static void Test()
+        {
+            GroupAnagramsSolution solution = new GroupAnagramsSolution();
+
+            List<string> strs = new List<string> { "eat", "tea", "tan", "ate", "nat", "bat" };
+
+            solution.groupAnagrams(strs.ToArray()).ForEach(x => Console.WriteLine(string.Join(",", x)));
+        }
+        
         public List<List<string>> groupAnagrams(string[] strs)
         {
             throw new NotImplementedException();

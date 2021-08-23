@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Datastructure.Algorithms.Practice
@@ -18,11 +19,11 @@ namespace Datastructure.Algorithms.Practice
         {
             RemoveInvalidParentheses solution = new RemoveInvalidParentheses();
 
-            List<string> input = new List<string> { "()())()", "(a)())()", ")(" };
+            List<string> input = new List<string> { "()())()", "(a)())()", "())" };
 
             foreach (string s in input)
             {
-                Console.WriteLine(s + ": " + solution.RemoveParentheses(s));
+                Console.WriteLine(s + ": " + string.Join(",", solution.RemoveParentheses(s)));
             }
         }
 
@@ -30,5 +31,6 @@ namespace Datastructure.Algorithms.Practice
         {
             throw new NotImplementedException();
         }
+
     }
 }

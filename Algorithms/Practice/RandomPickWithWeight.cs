@@ -21,7 +21,11 @@ namespace Datastructure.Algorithms.Practice
     {
         public static void Test()
         {
+            int[] w = new int[2] { 1, 3 };
+            Solution solution = new Solution(w);
 
+            Console.WriteLine(solution.PickIndex());
+            Console.WriteLine(solution.PickIndex());
         }
 
         public class Solution

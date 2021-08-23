@@ -33,7 +33,51 @@ namespace Datastructure.Algorithms.Practice
 
         private string MinRemoveToMakeValid(string s)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            StringBuilder sb = new StringBuilder();
+
+            // right most closed parenthesis
+
+            int balance = 0, totalClosed = 0;
+
+            foreach(char c in s)
+            {
+                if (c == '(')
+                {
+                    balance++;
+                }
+                else if (c == ')')
+                {
+                    if (balance <= 0)
+                        continue;
+
+                    balance--;
+                    totalClosed++;
+                }
+
+                sb.Append(c);
+            }
+
+
+            // Left Most Open Parenthesis
+
+            StringBuilder res = new StringBuilder();
+
+            foreach (char c in sb.ToString())
+            {
+                if (c == '(')
+                {
+                    if (totalClosed <= 0)
+                        continue; 
+                    
+                    totalClosed--;
+                }
+
+                res.Append(c);
+            }
+
+            return res.ToString();
         }
     }
 

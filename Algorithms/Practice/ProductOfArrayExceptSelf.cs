@@ -16,6 +16,8 @@ namespace Datastructure.Algorithms.Practice
     {
         public static void Test()
         {
+            ProductOfArrayExceptSelf solution = new ProductOfArrayExceptSelf();
+
             List<List<int>> tests = new List<List<int>>()
             {
                 new List<int>() {1, 2, 3, 4},
@@ -24,12 +26,12 @@ namespace Datastructure.Algorithms.Practice
 
             foreach(var test in tests)
             {
-                int[] result = ProductExceptSelf(test.ToArray());
+                int[] result = solution.ProductExceptSelf(test.ToArray());
                 Console.WriteLine(string.Join(",", result));
             }
         }
 
-        private static int[] ProductExceptSelf(int[] nums)
+        public int[] ProductExceptSelf(int[] nums)
         {
             throw new NotImplementedException();
         }
