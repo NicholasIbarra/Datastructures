@@ -33,88 +33,138 @@ namespace Datastructure.Algorithms.Solutions
             Console.WriteLine(solution.IsNumber(input));
         }
 
-        public bool IsNumber(string s)
+        private class State
         {
-            bool dotIsAllowed = true;
-            bool signAllowed = true;
-            bool eIsAllowed = true;
-            bool numerOrSignIsRequired = false;
-            bool numerIsRequired = false;
-            bool isSign = false;
+            public bool IsValidEndState { get; set; }
 
-            int i = 0;
+            public Func<char, State> NextState { get; set; }
 
-            foreach (byte b in System.Text.Encoding.UTF8.GetBytes(s.ToCharArray()))
+            public static bool IsSign(char c)
             {
-                i++;
-                int ascii = int.Parse(b.ToString());
-
-                bool isDigit = ascii >= 48 && ascii <= 57;
-                isSign = ascii == 43 || ascii == 45;
-                bool isE = ascii == 101 || ascii == 69;
-                bool isDot = ascii == 46;
-
-                if (!(isDigit || isSign || isE || isDot))
-                    return false;
-
-                if (numerOrSignIsRequired)
-                {
-                    if (!(isDigit || isSign))
-                        return false;
-                    else
-                    {
-                        numerOrSignIsRequired = false;
-                        continue;
-                    }
-                }
-
-                if (numerIsRequired && !isDigit)
-                    if (isDot && dotIsAllowed)
-                        continue;
-                    else
-
-                        return false;
-
-                if (isSign)
-                {
-                    if (!signAllowed)
-                        return false;
-                    else
-                    {
-                        signAllowed = false;
-                        numerIsRequired = true;
-                    }
-                }
-                else if(isDot)
-                {
-                    if (!dotIsAllowed)
-                        return false; // a dot was previous detected
-                    else
-                    {
-                        signAllowed = false;
-                        dotIsAllowed = false;
-                        numerIsRequired = i == 1;
-                    }
-                }
-                else if (isE)
-                {
-                    if (i == 1 || !eIsAllowed)
-                        return false;
-                    else
-                    {
-                        numerOrSignIsRequired = true;
-                        dotIsAllowed = false;
-                        eIsAllowed = false;
-                    }
-                }
-                else if (isDigit)
-                {
-                    signAllowed = false;
-                    numerIsRequired = false;
-                }
+                return c == '+' || c == '-';
             }
 
-            return numerOrSignIsRequired || numerIsRequired || isSign ? false : true;
+            public static bool IsExp(char c)
+            {
+                return c == 'e' || c == 'E';
+            }
+
+            public static bool IsDot(char c)
+            {
+                return c == '.';
+            }
+
+            public static bool IsDigit(char c)
+            {
+                return Char.IsDigit(c);
+            }
+        }
+
+        private State Init;
+        private State Decimal;
+        private State Number;
+        private State OnlyInts;
+        private State Dot;
+        private State Sign;
+        private State Exp;
+        private State DecimalSign;
+        private State Invalid;
+
+
+        public bool IsNumber(string s)
+        {
+            Init = new State
+            {
+                NextState =
+                    c =>
+                    {
+                        if (State.IsDigit(c)) return Number;
+                        if (State.IsSign(c)) return Sign;
+                        if (State.IsDot(c)) return Dot;
+                        return Invalid;
+                    },
+                IsValidEndState = false
+            };
+
+            Sign = new State
+            {
+                NextState =
+                    c =>
+                    {
+                        if (State.IsDigit(c)) return Number;
+                        if (State.IsDot(c)) return Dot;
+                        return Invalid;
+                    },
+                IsValidEndState = false
+            };
+
+            DecimalSign = new State
+            {
+                NextState =
+                    c => State.IsDigit(c) ? OnlyInts : Invalid,
+                IsValidEndState = false
+            };
+
+            Dot = new State
+            {
+                NextState =
+                    c => State.IsDigit(c) ? Decimal : Invalid,
+                IsValidEndState = false
+            };
+
+            Number = new State
+            {
+                NextState =
+                    c =>
+                    {
+                        if (State.IsDigit(c)) return Number;
+                        if (State.IsExp(c)) return Exp;
+                        if (State.IsDot(c)) return Decimal;
+                        return Invalid;
+                    },
+                IsValidEndState = true
+            };
+
+            Decimal = new State
+            {
+                NextState =
+                    c =>
+                    {
+                        if (State.IsDigit(c)) return Decimal;
+                        if (State.IsExp(c)) return Exp;
+                        return Invalid;
+                    },
+                IsValidEndState = true
+            };
+
+            Exp = new State
+            {
+                NextState =
+                    c =>
+                    {
+                        if (State.IsDigit(c)) return OnlyInts;
+                        if (State.IsSign(c)) return DecimalSign;
+                        return Invalid;
+                    },
+                IsValidEndState = false
+            };
+
+            OnlyInts = new State
+            {
+                NextState =
+                    c => State.IsDigit(c) ? OnlyInts : Invalid,
+                IsValidEndState = true
+            };
+
+            Invalid = new State();
+
+            State state = Init;
+            foreach (char c in s)
+            {
+                state = state.NextState(c);
+                if (state.Equals(Invalid)) return false;
+            }
+            return state.IsValidEndState;
         }
     }
 }

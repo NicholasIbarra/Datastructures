@@ -32,7 +32,24 @@ namespace Datastructure.Algorithms.Practice
 
         public static int[] Solution(int[] nums, int target)
         {
-            throw new NotImplementedException();
+            Dictionary<int, int> map = new Dictionary<int, int>();
+            int a = 0, b = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                // a + b = target;
+                // a = target - b;
+                a = target - nums[i];
+
+                if (map.ContainsKey(a))
+                {
+                    return new int[] { map[a], i };
+                }
+
+                map.Add(nums[i], i);
+            }
+
+            return null;
         }
     }
 }

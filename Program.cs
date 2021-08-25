@@ -10,7 +10,7 @@ namespace Datastructure
         static void Main(string[] args)
         {
             //ProductOfArrayExceptSelf.Test();
-            Maximum_Swap.Test();
+            Datastructure.Algorithms.Practice.ValidNumber.Test();
 
         }
     }
