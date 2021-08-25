@@ -49,7 +49,6 @@ namespace Datastructure.Algorithms.Solutions
             // Leasst Interval = total Tasks + idle_time
             // Total tasks = tasks.length
             // Idle_time = (f_max - 1) * n
-
             // Sort tasks by frequency
 
             int[] freq = new int[26];
@@ -62,13 +61,14 @@ namespace Datastructure.Algorithms.Solutions
 
             // Get most frequent and idle times
             int f_max = freq[25];
-            int idle_max = (f_max - 1) * n;
+            int idle_spots = f_max - 1;
+            int idle_max = idle_spots * n;
 
             // Reduce idle_time with additiion task taht can tak that timeslot
             for (int i = freq.Length - 2; i >= 0 && idle_max > 0; i--)
             {
                 // Min is becuase you can only take one idle space 
-                idle_max -= Math.Min(f_max - 1, freq[i]);
+                idle_max -= Math.Min(idle_spots, freq[i]);
             }
 
             // Ensure idle_time is not negative

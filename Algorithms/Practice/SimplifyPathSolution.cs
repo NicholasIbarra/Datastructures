@@ -39,35 +39,7 @@ namespace Datastructure.Algorithms.Practice
 
         public string SimplifyPath(string path)
         {
-            Stack<string> directories = new Stack<string>();
-            string[] commands = path.Split("/");
-
-            foreach (string dir in commands)
-            {
-                if (dir == "." || string.IsNullOrEmpty(dir))
-                {
-                    continue;
-                }
-                else if (dir == "..")
-                {
-                    if (directories.Count > 0)
-                        directories.Pop();
-                }
-                else
-                {
-                    directories.Push(dir);
-                }
-            }
-
-            StringBuilder result = new StringBuilder();
-
-            while (directories.Count > 0)
-            {
-                result.Insert(0, directories.Pop());
-                result.Insert(0, "/");
-            }
-
-            return result.Length > 0 ? result.ToString() : "/";
+            throw new NotImplementedException();
         }
     }
 }

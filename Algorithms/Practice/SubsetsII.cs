@@ -18,7 +18,7 @@ namespace Datastructure.Algorithms.Practice
         {
             SubsetsII solution = new SubsetsII();
 
-            int[] nums = new int[] { 1, 2, 2 };
+            int[] nums = new int[] { 1, 2, 3 };
             IList<IList<int>> result = solution.SubsetsWithDup(nums);
 
             result.ToList().ForEach(x => Console.WriteLine(string.Join(", ", x)));

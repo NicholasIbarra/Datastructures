@@ -15,7 +15,7 @@ namespace Datastructure.Algorithms.Practice
 
     https://leetcode.com/problems/binary-tree-maximum-path-sum/
     */
-    class BinaryTreeMaximumPathSum
+    class Diameter_of_Binary_Tree
     {
         public static void Test()
         {
@@ -29,7 +29,7 @@ namespace Datastructure.Algorithms.Practice
                 }
             };
 
-            BinaryTreeMaximumPathSum solution = new BinaryTreeMaximumPathSum();
+            Diameter_of_Binary_Tree solution = new Diameter_of_Binary_Tree();
             Console.WriteLine(solution.MaxPathSum(root));
 
             TreeNode root2 = new TreeNode(2)

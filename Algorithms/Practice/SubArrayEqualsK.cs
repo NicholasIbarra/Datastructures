@@ -28,7 +28,7 @@ namespace Datastructure.Algorithms.Practice
             Console.WriteLine(r2);
         }
 
-        private int Solution(int[] nums2, int k2)
+        private int Solution(int[] nums, int k)
         {
             throw new NotImplementedException();
         }

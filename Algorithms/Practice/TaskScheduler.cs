@@ -29,7 +29,30 @@ namespace Datastructure.Algorithms.Practice
 
         public static int LeastInerval(char[] tasks, int n)
         {
-            throw new NotImplementedException();
+            int[] freq = new int[26];
+
+            // O(N)
+            for(int i = 0; i < tasks.Length; i++)
+            {
+                freq[tasks[i] - 'A']++;
+            }
+
+            // O(log 26)
+            Array.Sort(freq);
+
+            int maxFreq = freq[25];
+            int idleSlots = maxFreq - 1;
+            int minIdle = idleSlots * n;
+
+            // O(26)
+            for (int i = freq.Length - 2; i >= 0 && minIdle >= 0; i--)
+            {
+                minIdle -= Math.Min(idleSlots, freq[i]);
+            }
+
+            minIdle = Math.Max(minIdle, 0);
+
+            return tasks.Length + minIdle;
         }
     }
 }

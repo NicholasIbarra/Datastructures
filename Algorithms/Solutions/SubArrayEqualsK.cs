@@ -14,8 +14,8 @@ namespace Datastructure.Algorithms.Solutions
     {
         public static void Test()
         {
-            int[] nums = new int[] { 2, 1, 1 };
-            int k = 2;
+            int[] nums = new int[] { 23, 2, 4, 6, 7 };
+            int k = 6;
 
             //int[] nums = new int[] { 3, 4, 7, 2, -3, 1, 4, 2 };
             //int k = 7;
@@ -54,13 +54,22 @@ namespace Datastructure.Algorithms.Solutions
 
             for(int i = 0; i < nums.Length; i++)
             {
-                if (map.ContainsKey(sum)) map[sum]++;
-                else map.Add(sum, 1); 
-                
-                sum += nums[i];
+                if (map.ContainsKey(sum))
+                {
+                    map[sum]++;
+                }
+                else
+                {
+                    map.Add(sum, 1);
+                }
 
-                if (map.ContainsKey(sum - k))
-                    count += map[sum - k];
+                sum += nums[i];
+                int key = sum - k;
+
+                if (map.ContainsKey(key))
+                {
+                    count += map[key];
+                }
             }
 
             return count;
