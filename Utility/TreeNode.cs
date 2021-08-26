@@ -40,4 +40,37 @@ namespace Datastructure.Utility
             right = _right;
         }
     }
+
+    public class LinkedListNode
+    {
+        public int val;
+        public LinkedListNode next;
+
+        public LinkedListNode() { }
+
+        public LinkedListNode(int _val)
+        {
+            val = _val;
+            next = null;
+        }
+
+        public LinkedListNode(int _val, LinkedListNode _next)
+        {
+            val = _val;
+            next = _next;
+        }
+    }
+
+    class BinaryMatrix
+    {
+        public int Get(int row, int col) 
+        {
+            return 0;
+        }
+        
+        public IList<int> Dimensions() 
+        {
+            return new List<int>();
+        }
+    }
 }
