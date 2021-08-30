@@ -5,14 +5,9 @@ using System.Text;
 
 namespace Datastructure.Algorithms.Solutions
 {
-    /*
-     Given a string s that contains parentheses and letters,
-    remove the minimum number of invalid parentheses to make the input string valid.
-
-    Return all the possible results. You may return the answer in any order.
-
-    https://leetcode.com/problems/remove-invalid-parentheses/
-    */
+    // https://leetcode.com/problems/remove-invalid-parentheses/
+    // Time: O(2 ^ n)
+    // Space: O(n)
     class RemoveInvalidParenthesesSolution
     {
         public static void Test()
@@ -23,108 +18,19 @@ namespace Datastructure.Algorithms.Solutions
 
             foreach(string s in input)
             {
-                Console.WriteLine(s + ": " + string.Join(",", solution.removeInvalidParentheses(s)));
+                Console.WriteLine(s + ": " + string.Join(",", solution.RemoveInvalidParentheses(s)));
             }
         }
-
-        public IList<string> RemoveInvalidParentheses(string s)
-        {
-            var list = new List<string>();
-
-            if (isValidParanthesis(s))
-            {
-                list.Add(s);
-                return list;
-            }
-
-            var queue = new Queue<Tuple<string, int, char>>();
-            queue.Enqueue(new Tuple<string, int, char>(s, 0, ')'));
-
-            while (queue.Count > 0)
-            {
-                var current = queue.Dequeue();
-
-                var search  = current.Item1;
-                var start   = current.Item2;
-                var removed = current.Item3;
-
-                // Start from last removal
-                for (int i = start; i < search.Length; i++)
-                {
-                    var visit = search[i];
-
-                    // not parenthesis
-                    if (!(visit == '(' || visit == ')'))
-                    {
-                        continue;
-                    }
-
-                    // Do not remove consectuive ones, i.e. (((
-                    if (i != start && search[i - 1] == visit)
-                    {
-                        continue;
-                    }
-
-                    // Do not remove valid pair
-                    if (removed == '(' && visit == ')')
-                    {
-                        continue;
-                    }
-
-                    // remove visit char from the string
-                    var skipCurrent = search.Substring(0, i) + search.Substring(i + 1);
-                    
-                    if (isValidParanthesis(skipCurrent))
-                    {
-                        list.Add(skipCurrent);
-                        continue;
-                    }
-
-                    if (list.Count == 0)
-                    {
-                        queue.Enqueue(new Tuple<string, int, char>(skipCurrent, i, visit));
-                    }
-                }
-            }
-
-            return list;
-        }
-
-        private bool isValidParanthesis(string s)
-        {
-            int count = 0;
-            for (int i = 0; i < s.Length; i++)
-            {
-                var visit = s[i];
-                var isOpen = visit == '(';
-                var isClose = visit == ')';
-
-                if (isOpen) ++count;
-
-                if (isClose)
-                {
-                    bool noOpenToMatch = count <= 0;
-
-                    if (noOpenToMatch) return false;
-
-                    count--;
-                }
-            }
-
-            return count == 0;
-        }
-
-
 
         private HashSet<string> validExpressions = new HashSet<string>();
 
-        private void recurse(
-            String s,
+        private void backtrack(
+            string s,
             int index,
-            int leftCount,
-            int rightCount,
-            int leftRem,
-            int rightRem,
+            int lc,
+            int rc,
+            int left,
+            int right,
             StringBuilder expression)
         {
 
@@ -133,7 +39,7 @@ namespace Datastructure.Algorithms.Solutions
             // parentheses that we should have removed.
             if (index == s.Length)
             {
-                if (leftRem == 0 && rightRem == 0)
+                if (left == 0 && right == 0)
                 {
                     this.validExpressions.Add(expression.ToString());
                 }
@@ -146,15 +52,15 @@ namespace Datastructure.Algorithms.Solutions
 
                 // The discard case. Note that here we have our pruning condition.
                 // We don't recurse if the remaining count for that parenthesis is == 0.
-                if ((character == '(' && leftRem > 0) || (character == ')' && rightRem > 0))
+                if ((character == '(' && left > 0) || (character == ')' && right > 0))
                 {
-                    this.recurse(
+                    this.backtrack(
                         s,
                         index + 1,
-                        leftCount,
-                        rightCount,
-                        leftRem - (character == '(' ? 1 : 0),
-                        rightRem - (character == ')' ? 1 : 0),
+                        lc,
+                        rc,
+                        left - (character == '(' ? 1 : 0),
+                        right - (character == ')' ? 1 : 0),
                         expression);
                 }
 
@@ -164,21 +70,21 @@ namespace Datastructure.Algorithms.Solutions
                 if (character != '(' && character != ')')
                 {
 
-                    this.recurse(s, index + 1, leftCount, rightCount, leftRem, rightRem, expression);
+                    this.backtrack(s, index + 1, lc, rc, left, right, expression);
 
                 }
                 else if (character == '(')
                 {
 
                     // Consider an opening bracket.
-                    this.recurse(s, index + 1, leftCount + 1, rightCount, leftRem, rightRem, expression);
+                    this.backtrack(s, index + 1, lc + 1, rc, left, right, expression);
 
                 }
-                else if (rightCount < leftCount)
+                else if (rc < lc)
                 {
 
                     // Consider a closing bracket.
-                    this.recurse(s, index + 1, leftCount, rightCount + 1, leftRem, rightRem, expression);
+                    this.backtrack(s, index + 1, lc, rc + 1, left, right, expression);
                 }
 
                 // Delete for backtracking.
@@ -186,7 +92,7 @@ namespace Datastructure.Algorithms.Solutions
             }
         }
 
-        public List<string> removeInvalidParentheses(string s)
+        public List<string> RemoveInvalidParentheses(string s)
         {
 
             int left = 0, right = 0;
@@ -202,16 +108,12 @@ namespace Datastructure.Algorithms.Solutions
                 }
                 else if (s[i] == ')')
                 {
-                    // If we don't have a matching left, then this is a misplaced right, record it.
                     right = left == 0 ? right + 1 : right;
-
-                    // Decrement count of left parentheses because we have found a right
-                    // which CAN be a matching one for a left.
                     left = left > 0 ? left - 1 : left;
                 }
             }
 
-            this.recurse(s, 0, 0, 0, left, right, new StringBuilder());
+            this.backtrack(s, 0, 0, 0, left, right, new StringBuilder());
             return new List<string>(this.validExpressions);
         }
     }

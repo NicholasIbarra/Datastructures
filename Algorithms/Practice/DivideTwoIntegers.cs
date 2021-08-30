@@ -33,7 +33,7 @@ namespace Datastructure.Algorithms.Practice
             Console.WriteLine(result);
         }
 
-        private static int Solution(int dividend, int divisor)
+        private static int Solution(int number, int divingBy)
         {
             throw new NotImplementedException();
         }

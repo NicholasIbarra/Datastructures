@@ -41,7 +41,7 @@ namespace Datastructure.Algorithms.Practice
             Console.WriteLine(solution.MaxPathSum(root2));
         }
 
-        int MaxPathSum(TreeNode root)
+        public int MaxPathSum(TreeNode root)
         {
             throw new NotImplementedException();
         }

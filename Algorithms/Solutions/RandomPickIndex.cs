@@ -4,17 +4,9 @@ using System.Text;
 
 namespace Datastructure.Algorithms.Solutions
 {
-    /*
-    Given an integer array nums with possible duplicates, randomly output the index of a given target number. You can assume that the given target number must exist in the array.
-
-    Implement the Solution class:
-
-    Solution(int[] nums) Initializes the object with the array nums.
-    int pick(int target) Picks a random index i from nums where nums[i] == target. If there are multiple valid i's, then each index should have an equal probability of returning.
-
-    https://leetcode.com/problems/random-pick-index/
-
-     */
+    // https://leetcode.com/problems/random-pick-index/
+    // Time: O(n)
+    // Space: O(1)
     class RandomPickIndex
     {
         public static void Test()
@@ -40,11 +32,10 @@ namespace Datastructure.Algorithms.Solutions
 
             public int Pick(int target)
             {
-                int n = this.nums.Length;
                 int count = 0;
                 int idx = 0;
 
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < nums.Length; i++)
                 {
                     if (this.nums[i] == target)
                     {

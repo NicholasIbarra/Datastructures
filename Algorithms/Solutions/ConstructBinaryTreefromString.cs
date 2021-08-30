@@ -5,16 +5,10 @@ using System.Text;
 
 namespace Datastructure.Algorithms.Solutions
 {
-    /* Medium
-    You need to construct a binary tree from a string consisting of parenthesis and integers.
+    // https://leetcode.com/problems/construct-binary-tree-from-string/
+    // Time: O(N)
+    // Space: O(H), height of tree
 
-    The whole input represents a binary tree. It contains an integer followed by zero, one or 
-    two pairs of parenthesis. The integer represents the root's value and a pair of parenthesis contains a child binary tree with the same structure.
-
-    You always start to construct the left child node of the parent first if it exists.
-
-     https://leetcode.com/problems/construct-binary-tree-from-string/
-     */
     class ConstructBinaryTreefromString
     {
         public static void Test()
@@ -57,35 +51,40 @@ namespace Datastructure.Algorithms.Solutions
             Stack<TreeNode> stack = new Stack<TreeNode>();
             stack.Push(root);
 
-            for (int i = 0, j = i; i < s.Length; i++, j = i)
+            for (int index = 0; index < s.Length;)
             {
-                char c = s[i];
+                TreeNode node = stack.Pop();
 
-                if (c == ')')
+                // Not STarted
+                if (char.IsNumber(s[index]) || s[index] == '-')
                 {
-                    stack.Pop();
-                }
-                else if (c >= '0' && c <= '9' || c == '-')
-                {
-                    while (i + 1 < s.Length && s[i + 1] >= '0' && s[i + 1] <= '9') i++;
+                    Tuple<int, int> data = this.getNumer(s, index);
+                    int value = data.Item1;
+                    index = data.Item2;
 
-                    int val = 0;
-                    int.TryParse(s.Substring(j, j - i + 1), out val);
+                    node.val = value;
 
-                    TreeNode currentNode = new TreeNode(val);
-
-                    if (stack.Count > 0)
+                    // next, if there is any data left, we check for the first subtree
+                    // which according to the problem statement, will always be the left child
+                    if (index < s.Length && s[index] == '(')
                     {
-                        TreeNode parent = stack.Peek();
-                        if (parent.left != null) parent.right = currentNode;
-                        else parent.left = currentNode;
+                        stack.Push(node);
+                        node.left = new TreeNode();
+                        stack.Push(node.left);
                     }
-
-                    stack.Push(currentNode);
                 }
+                else if (s[index] == '(' && node.left != null)
+                {
+                    // left is done
+                    stack.Push(node);
+                    node.right = new TreeNode();
+                    stack.Push(node.right);
+                }
+
+                index++;
             }
 
-            return stack.Count > 0 ? null : stack.Peek();
+            return stack.Count == 0 ? root : stack.Pop();
         }
 
         private Tuple<int, int> getNumer(string s, int index)

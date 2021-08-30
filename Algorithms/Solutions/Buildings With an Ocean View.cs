@@ -27,19 +27,28 @@ namespace Datastructure.Algorithms.Solutions
 
         public int[] FindBuildings(int[] heights)
         {
-            List<int> hasOceanView = new List<int>();
-            int maxHeight = -1;
+            List<int> ls = new List<int>();
+            int last = int.MinValue;
 
-            for (int i = 0; i < heights.Length; i++)
+            for (int i = heights.Length - 1; i >= 0; i--)
             {
-                if (heights[i] > maxHeight)
+                if (heights[i] > last)
                 {
-
+                    ls.Add(i);
+                    last = heights[i];
                 }
             }
 
-            return hasOceanView.ToArray();
-        }
+            int index = 0;
+            int[] answer = new int[ls.Count];
 
+            for(int i = ls.Count - 1; i >= 0; i--)
+            {
+                answer[index] = ls[i];
+                index++;
+            }
+
+            return answer;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Datastructure.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,16 +34,22 @@ namespace Datastructure.Algorithms.Solutions
             result.ToList().ForEach(r => Console.WriteLine(string.Join(",", r)));
         }
 
+        private static int Distance(int[] p) => p[0] * p[0] + p[1] * p[1];
+
         public int[][] KClosest(int[][] points, int k)
         {
-            List<int[]> result = new List<int[]>();
+            var priority = new Heap<int[]>((one, two) => Distance(one).CompareTo(Distance(two)), k + 1);
 
-            for (int i = 0; i < points.Length; i++)
+            foreach(var point in points)
             {
-                double distance = Math.Pow(Math.Pow((0 - points[i][0]), 2) + Math.Pow((0 - points[i][1]), 2), .5);
+                priority.Add(point);
+                if (priority.Count > k)
+                {
+                    priority.DeleteMax();
+                }
             }
 
-            return result.ToArray();
+            return priority.ToArray();
         }
     }
 }

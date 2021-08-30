@@ -4,14 +4,9 @@ using System.Text;
 
 namespace Datastructure.Algorithms.Solutions
 {
-    /*
-    Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
-    The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
-
-    You must write an algorithm that runs in O(n) time and without using the division operation.
-
-    https://leetcode.com/problems/product-of-array-except-self/
-    */
+    // https://leetcode.com/problems/product-of-array-except-self/
+    // time: O(n)
+    // Space: O(n)
     class ProductOfArrayExceptSelf
     {
         public static void Test()
@@ -27,39 +22,6 @@ namespace Datastructure.Algorithms.Solutions
                 int[] result = ProductExceptSelfConstantSpace(test.ToArray());
                 Console.WriteLine(string.Join(",", result));
             }
-        }
-
-        private static int[] ProductExceptSelf(int[] nums)
-        {
-            int length = nums.Length;
-
-            int[] L = new int[length];
-            int[] R = new int[length];
-
-            // Calcualte the products to the left
-            L[0] = 1;
-            
-            for(int i = 1; i < length; i++)
-            {
-                L[i] = L[i - 1] * nums[i - 1];
-            }
-            
-            // Calculate the products to the right
-            R[length - 1] = 1;
-            for (int i = length - 2; i >= 0; i--)
-            {
-                R[i] = R[i + 1] * nums[i + 1];
-            }
-
-            int[] answer = new int[length];
-
-            // Calculate final answer
-            for (int i = 0; i < length; i++)
-            {
-                answer[i] = L[i] * R[i];
-            }
-
-            return answer;
         }
 
         private static int[] ProductExceptSelfConstantSpace(int[] nums)

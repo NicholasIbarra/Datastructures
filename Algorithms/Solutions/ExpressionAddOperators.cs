@@ -5,13 +5,9 @@ using System.Text;
 
 namespace Datastructure.Algorithms.Solutions
 {
-    /*
-     Given a string num that contains only digits and an integer target, 
-    return all possibilities to add the binary operators '+', '-', or '*' between the digits of num so that the resultant 
-    expression evaluates to the target value.
-
-    https://leetcode.com/problems/expression-add-operators/
-    */
+    // https://leetcode.com/problems/expression-add-operators/
+    // Time: O(n * n^4)
+    // Space: O(n)
     class ExpressionAddOperators
     {
         private int target;
@@ -56,8 +52,8 @@ namespace Datastructure.Algorithms.Solutions
                 if (value == this.target && currentOperand == 0)
                 {
                     StringBuilder sb = new StringBuilder();
-                    ops.GetRange(1, ops.Count - 1).ForEach(v => sb.Append(v));
 
+                    sb.AppendJoin("", ops.Skip(1));
                     this.answer.Add(sb.ToString());
                 }
 

@@ -46,7 +46,7 @@ namespace Datastructure.Algorithms.Solutions
             {
                 TrieNode node = trie;
 
-                foreach (char ch in word.ToCharArray())
+                foreach (char ch in word)
                 {
                     if (!node.children.ContainsKey(ch))
                     {

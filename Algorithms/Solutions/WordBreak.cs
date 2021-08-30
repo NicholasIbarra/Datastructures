@@ -5,13 +5,10 @@ using System.Text;
 
 namespace Datastructure.Algorithms.Solutions
 {
-    /// <summary>
-    /// Given a string s and a dictionary of strings wordDict, return true 
-    /// if s can be segmented into a space-separated sequence of one or more dictionary words.
-    /// Note that the same word in the dictionary may be reused multiple times in the segmentation.
-    /// 
-    /// https://leetcode.com/problems/word-break/
-    /// </summary>
+    // https://leetcode.com/problems/word-break/
+    // Time complexity : O(n^3) -- For every starting index, the search can continue till the end of the given string.
+    // Space complexity : O(n) -- Queue of at most nn size is needed.
+
     public class WordBreak
     {
         public static void Test()
@@ -28,7 +25,6 @@ namespace Datastructure.Algorithms.Solutions
 
         public bool BreadthFirstSolution(string s, IList<string> wordDict)
         {
-            HashSet<string> wordDictSet = new HashSet<string>(wordDict);
             Queue<int> queue = new Queue<int>();
 
             bool[] visited = new bool[s.Length];
@@ -43,7 +39,7 @@ namespace Datastructure.Algorithms.Solutions
                 for(int end = start + 1; end <= s.Length;  end++)
                 {
                     string substring = s.Substring(start, end - start);
-                    if (wordDictSet.Contains(substring))
+                    if (wordDict.Contains(substring))
                     {
                         queue.Enqueue(end);
                         if (end == s.Length)

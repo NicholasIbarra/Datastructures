@@ -4,13 +4,10 @@ using System.Text;
 
 namespace Datastructure.Algorithms.Solutions
 {
-    /*
-    Given an integer array nums and an integer k, return the kth largest element in the array.
+    // https://leetcode.com/problems/kth-largest-element-in-an-array/
+    // time: Average, O(N) worst O(n^2)
+    // Space: O(1)
 
-    Note that it is the kth largest element in the sorted order, not the kth distinct element.
-
-    https://leetcode.com/problems/kth-largest-element-in-an-array/
-    */
     class KthLargestElementInArray
     {
         static Random random = new Random();

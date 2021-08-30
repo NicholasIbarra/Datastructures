@@ -38,7 +38,31 @@ namespace Datastructure.Algorithms.Practice
 
         public int[][] Merge(int[][] intervals)
         {
-            throw new NotImplementedException();
+            // O(log n)
+            Array.Sort(intervals, (a, b) => a[0] - b[0]);
+
+            List<int[]> result = new List<int[]>();
+
+            int last = int.MinValue;
+
+            // O(n)
+            for (int i = 0; i < intervals.Length; i++)
+            {
+                int[] current = intervals[i];
+
+                if (last < current[0])
+                {
+                    result.Add(current);
+                }
+                else if (last < current[1])
+                {
+                    result.Last()[1] = Math.Max(result.Last()[1], current[1]);
+                }
+
+                last = result.Last()[1];
+            }
+
+            return result.ToArray();
         }
     }
 }

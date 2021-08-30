@@ -50,7 +50,32 @@ namespace Datastructure.Algorithms.Practice
 
         private IList<int> RightSideView(TreeNode root)
         {
-            throw new NotImplementedException();
+            if (root == null) return new List<int>(); 
+            
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            List<int> result = new List<int>();
+
+            queue.Enqueue(root);
+
+            while (queue.Count > 0)
+            {
+                int n = queue.Count;
+
+                for(int i = 1; i <= n; i++)
+                {
+                    TreeNode node = queue.Dequeue();
+
+                    if (i == n)
+                    {
+                        result.Add(node.val);
+                    }
+
+                    if (node.left != null) queue.Enqueue(node.left);
+                    if (node.right != null) queue.Enqueue(node.right);
+                }
+            }
+
+            return result;
         }
     }
 }
