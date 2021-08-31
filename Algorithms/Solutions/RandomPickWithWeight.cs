@@ -23,7 +23,8 @@ namespace Datastructure.Algorithms.Solutions
 
         public static void Test()
         {
-            Console.WriteLine(random.NextDouble());
+            Solution solution = new Solution(new int[] { 1, 3 });
+            Console.WriteLine(solution.PickIndex());
         }
 
         public class Solution
