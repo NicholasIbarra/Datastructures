@@ -10,7 +10,7 @@ namespace Datastructure
         static void Main(string[] args)
         {
             //ProductOfArrayExceptSelf.Test();
-            Datastructure.Algorithms.Practice.ValidNumber.Test();
+            RandomPickWithWeight.Test();
 
         }
     }
