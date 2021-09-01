@@ -25,7 +25,36 @@ namespace Datastructure.Algorithms.Practice
 
         private bool ValidPalindrome(string s)
         {
-            throw new NotImplementedException();
+            int i = 0, j = s.Length - 1;
+
+            while (i < j)
+            {
+                if (s[i] != s[j])
+                {
+                    return ValidPalindromeAfterRemoval(s, i + 1, j) || ValidPalindromeAfterRemoval(s, i, j - 1));
+                }
+
+                i++;
+                j--;
+            }
+
+            return true;
+        }
+
+        private bool ValidPalindromeAfterRemoval(string s, int i, int j)
+        {
+            while (i < j)
+            {
+                if (s[i] != s[j])
+                {
+                    return false;
+                }
+
+                i++;
+                j--;
+            }
+
+            return true;
         }
     }
 }
