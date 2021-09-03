@@ -4,6 +4,15 @@ using System.Text;
 
 namespace Datastructure.Algorithms.Solutions
 {
+    /*
+        In an alien language, surprisingly they also use english lowercase letters, 
+        but possibly in a different order. The order of the alphabet is some permutation of lowercase letters.
+
+        Given a sequence of words written in the alien language, and the order of the alphabet, 
+        return true if and only if the given words are sorted lexicographicaly in this alien language.
+
+        https://leetcode.com/problems/verifying-an-alien-dictionary/
+     * */
     class VerifyinganAlienDictionary
     {
         public static void Test()
@@ -26,48 +35,6 @@ namespace Datastructure.Algorithms.Solutions
 
         public bool IsAlienSorted(string[] words, string order)
         {
-            Dictionary<char, int> orderSorted = new Dictionary<char, int>();
-
-            // O(26)
-            for (int i = 0; i < order.Length; i++ )
-            {
-                orderSorted.Add(order[i], i);
-            }
-
-            // O(N)
-            for (int start = 0; start < words.Length; start++)
-            {
-                for (int end = start + 1; end < words.Length; end++)
-                {
-                    if (!Compare(words[start], words[end], orderSorted))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        public bool Compare(string word1, string word2, Dictionary<char, int> orderSorted)
-        {
-            for(int i = 0; i < Math.Min(word1.Length, word2.Length); i ++)
-            {
-                int diff = orderSorted[word2[i]] - orderSorted[word1[i]];
-                
-                if (diff == 0)
-                {
-                    continue;
-                }
-
-                return diff >= 0;
-            }
-
-            return word1.Length <= word2.Length;
-        }
-
-        public bool AdjustCompareSolution(string[] words, string order)
-        {
             int[] orderMap = new int[26];
 
             for (int i = 0; i < order.Length; i++)
@@ -82,7 +49,7 @@ namespace Datastructure.Algorithms.Solutions
                     // World is longer then next
                     if (j >= words[i + 1].Length) return false;
 
-                    if (words[i][j] != words[i][j])
+                    if (words[i][j] != words[i + 1][j])
                     {
                         int currentWordChar = words[i][j] - 'a';
                         int nextWordChar = words[i + 1][j] - 'a';

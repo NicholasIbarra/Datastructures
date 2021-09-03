@@ -33,9 +33,39 @@ namespace Datastructure.Algorithms.Practice
 
         }
 
-        private bool IsAlienSorted(string[] words3, string order3)
+        private bool IsAlienSorted(string[] words, string order)
         {
-            throw new NotImplementedException();
+            int[] sortedWords = new int[26];
+
+            for (int i = 0; i < order.Length; i++)
+            {
+                sortedWords[order[i] - 'a'] = i;
+            }
+
+            for (int i = 0; i <                    ; i++)
+            {
+                for (int j = 0; j < words[i].Length; j++)
+                {
+                    if (j >= words[i + 1].Length) return false;
+
+                    if (words[i][j] != words[i + 1][j])
+                    {
+                        int currentChar = words[i][j] - 'a';
+                        int nextChar = words[i + 1][j] - 'a';
+
+                        if (sortedWords[currentChar] > sortedWords[nextChar])
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }
