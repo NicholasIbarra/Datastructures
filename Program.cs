@@ -10,8 +10,7 @@ namespace Datastructure
         static void Main(string[] args)
         {
             //ProductOfArrayExceptSelf.Test();
-            RandomPickWithWeight.Test();
-
+            //Diameter_of_Binary_Tree.Test();
         }
     }
 }

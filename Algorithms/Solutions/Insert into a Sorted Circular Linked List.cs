@@ -20,43 +20,37 @@ namespace Datastructure.Algorithms.Solutions
         {
             if (head == null)
             {
-                Node newNode = new Node(insertVal, null);
-                newNode.next = newNode;
+                Node root = new Node(insertVal, null);
+                root.next = root;
 
-                return newNode;
+                return root;
             }
 
             Node prev = head;
             Node curr = head.next;
-            bool toInsert = false;
 
             do
             {
+                // Scenario 1: in list
                 if (prev.val <= insertVal && insertVal <= curr.val)
                 {
-                    // Find a space in between the two nodes
-                    toInsert = true;
+                    break;
                 }
                 else if (prev.val > curr.val)
                 {
-                    // Reached the end, check if creater the the last value or smaller then then current
+                    // Scenario 2: At The End    
                     if (insertVal >= prev.val || insertVal <= curr.val)
                     {
-                        toInsert = true;
+                        break;
                     }
-                }
-
-                if (toInsert)
-                {
-                    prev.next = new Node(insertVal, curr);
-                    return head;
                 }
 
                 prev = curr;
                 curr = curr.next;
-            } while (prev != head);
+            }
+            while (prev != head);
 
-            // All values the same
+            // Scenario 3: All values the same, i.e. anywhere
             prev.next = new Node(insertVal, curr);
             return head;
         }

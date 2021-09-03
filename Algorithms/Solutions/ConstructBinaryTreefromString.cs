@@ -16,28 +16,6 @@ namespace Datastructure.Algorithms.Solutions
             ConstructBinaryTreefromString solution = new ConstructBinaryTreefromString();
 
             TreeNode node = solution.Str2tree("4(2(3)(1))(6(5))");
-
-            // Print using BFS
-            List<int> results = new List<int>();
-            Queue<TreeNode> queue = new Queue<TreeNode>();
-            queue.Enqueue(node);
-
-            while (queue.Count > 0)
-            {
-                int n = queue.Count;
-
-                for(int i = 0; i < n; i++)
-                {
-                    TreeNode el = queue.Dequeue();
-                    results.Add(el.val);
-
-                    if (el.left != null) queue.Enqueue(el.left);
-                    if (el.right != null) queue.Enqueue(el.right);
-                }
-            }
-
-            Console.WriteLine(string.Join(",", results));
-            
         }
 
         public TreeNode Str2tree(string s)
@@ -51,7 +29,7 @@ namespace Datastructure.Algorithms.Solutions
             Stack<TreeNode> stack = new Stack<TreeNode>();
             stack.Push(root);
 
-            for (int index = 0; index < s.Length;)
+            for (int index = 0; index < s.Length; index++)
             {
                 TreeNode node = stack.Pop();
 
@@ -80,8 +58,6 @@ namespace Datastructure.Algorithms.Solutions
                     node.right = new TreeNode();
                     stack.Push(node.right);
                 }
-
-                index++;
             }
 
             return stack.Count == 0 ? root : stack.Pop();

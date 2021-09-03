@@ -23,26 +23,29 @@ namespace Datastructure.Algorithms.Solutions
 
         public int MaximumSwap(int num)
         {
-            char[] digits = num.ToString().ToCharArray();
-            int[] buckets = new int[10];
+            // O(N)
+            char[] number = num.ToString().ToCharArray();
+            int[] numIndex = new int[10];
 
-            for (int i = 0; i < digits.Length; i++)
+            // O(N)
+            for (int i = 0; i < number.Length; i++)
             {
-                buckets[digits[i] - '0'] = i;
+                numIndex[number[i] - '0'] = i;
             }
 
-            for (int i = 0; i < digits.Length; i++)
+            // O(N)
+            for (int i = 0; i < number.Length; i++)
             {
-                for (int k = 9; k > digits[i] - '0'; k--)
+                // O(9)
+                for (int j = 9; j > number[i] - '0'; j--)
                 {
-                    if (buckets[k] > i)
+                    if (numIndex[j] > i)
                     {
-                        char tmp = digits[i];
-                        digits[i] = digits[buckets[k]];
-                        digits[buckets[k]] = tmp;
+                        char tmp = number[i];
+                        number[i] = number[numIndex[j]];
+                        number[numIndex[j]] = tmp;
 
-                        int.TryParse(digits, out num);
-                        return Convert.ToInt32(new string(digits));
+                        return Convert.ToInt32(new string(number));
                     }
                 }
             }
